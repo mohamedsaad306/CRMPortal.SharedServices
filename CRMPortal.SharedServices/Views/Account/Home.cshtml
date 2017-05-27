@@ -1,0 +1,17 @@
+﻿@model CRMPortal.SharedServices.ViewModels.AccountViewModel
+
+@{
+    ViewBag.Title = "Home";
+}
+
+<h2>Home</h2>
+
+@Html.LabelFor(e => e.Acc.Entity.Id, new { @class = "lable label-info" })
+@Html.DisplayFor(e => e.Acc.Entity.Id, new { @class = "lable label-info" })
+
+
+<h3>
+    <label class="label label-info">Last Name</label>
+    @Html.DisplayFor(e => e.Acc.UserLastName, new { @class = "lable label-info" });
+</h3>
+

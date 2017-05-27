@@ -1,0 +1,21 @@
+﻿@model CRMPortal.SharedServices.ViewModels.AccountViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+
+<h2>Login</h2>
+
+
+@using (Html.BeginForm("Login", "Account"))
+{
+    <div class="form-group">
+        @Html.LabelFor(e => e.Email)
+        @Html.TextBoxFor(e => e.Email, new { @class = "form-control" })
+        @Html.LabelFor(e => e.Password)
+        @Html.PasswordFor(e => e.Password, new { @class = "form-control" })
+        <input type="submit" value="Login" class="btn" />
+    </div>
+}
