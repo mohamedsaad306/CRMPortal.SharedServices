@@ -34,15 +34,23 @@ namespace CRMPortal.SharedServices.Controllers
             List<HelpDeskRequest> viewRequests = new List<HelpDeskRequest>();
             foreach (var r in requests)
             {
-                
-                viewRequests.Add(new HelpDeskRequest
+
+                try
                 {
-                    CreatedAt = DateTime.Parse(r["createdon"].ToString()),
-                    RequestTitle = r["new_name"].ToString(),
-                    RequestNumber = r["new_requestnumber"].ToString(),
-                    RequestDetails = r["new_requestdetails"].ToString(),
-                    StatusReason = r.FormattedValues["statuscode"].ToString()
-                });
+                    viewRequests.Add(new HelpDeskRequest
+                           {
+                               CreatedAt = DateTime.Parse(r["createdon"].ToString()),
+                               RequestTitle = r["new_name"].ToString(),
+                               RequestNumber = r["new_requestnumber"].ToString(),
+                               RequestDetails = r["new_requestdetails"].ToString(),
+                               StatusReason = r.FormattedValues["statuscode"].ToString()
+                           });
+                }
+                catch (KeyNotFoundException e)
+                {
+                    TempData["info"] = "Some Data Wasn't ready Please refresh this page again in few seconds ... ";
+                    continue;
+                }
             }
              
             HelpDeskIndexViewModel vm = new HelpDeskIndexViewModel() { Requests = viewRequests };

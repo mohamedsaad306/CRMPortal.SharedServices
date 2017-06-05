@@ -41,6 +41,7 @@ namespace CRMPortal.SharedServices.Models
         internal void SubmitRequest(Entity req)
         {
             Context.AddObject(req);
+            Context.SaveChanges();
         }
     }
 }
