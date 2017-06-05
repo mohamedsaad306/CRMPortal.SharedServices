@@ -31,7 +31,7 @@ namespace CRMPortal.SharedServices.AuthenticationLayer
             //Guid loggedInUserId = context.CreateQuery("systemuser").Where(u => u["internalemailaddress"] == email).FirstOrDefault().Id;
             UnitOfWork uof = new UnitOfWork(context);
             uof.AccModel.Email = _email;
-            Guid uid = uof.AccModel.UserId;
+            Guid? uid = uof.AccModel.UserId;
             //UnitsOfWork.Add(uid, uof);
             return uof;
         }

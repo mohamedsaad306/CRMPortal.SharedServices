@@ -37,6 +37,7 @@ namespace CRMPortal.SharedServices.Controllers
                 
                 viewRequests.Add(new HelpDeskRequest
                 {
+                    CreatedAt = DateTime.Parse(r["createdon"].ToString()),
                     RequestTitle = r["new_name"].ToString(),
                     RequestNumber = r["new_requestnumber"].ToString(),
                     RequestDetails = r["new_requestdetails"].ToString(),

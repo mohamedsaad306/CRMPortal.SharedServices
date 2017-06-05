@@ -8,17 +8,17 @@ using System.Web;
 
 namespace CRMPortal.SharedServices.Models
 {
-    public class UnitOfWork:IDisposable
+    public class UnitOfWork : IDisposable
     {
 
-    private readonly OrganizationServiceContext _context;
+        private readonly OrganizationServiceContext _context;
 
 
-        public UnitOfWork(OrganizationServiceContext ctx )
+        public UnitOfWork(OrganizationServiceContext ctx)
         {
             _context = ctx;
             AccModel = new AccountModel(_context);
-            
+
         }
         public void Dispose()
         {
@@ -26,8 +26,8 @@ namespace CRMPortal.SharedServices.Models
         }
 
         public AccountModel AccModel { get; set; }
-        public HelpDeskModel HelpDeskModel { get { return new HelpDeskModel(_context); }  }
-        public ContactModel ContactModel { get { return new ContactModel(_context); }  }
-
+        public HelpDeskModel HelpDeskModel { get { return new HelpDeskModel(_context); } }
+        public ContactModel ContactModel { get { return new ContactModel(_context); } }
+        public PurchaseOrderModel PurchaseOrderModel { get { return new PurchaseOrderModel(_context); } }
     }
 }

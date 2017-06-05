@@ -16,23 +16,46 @@ namespace CRMPortal.SharedServices.Models
 
         public string Email { get; set; }
         public string Password { get; set; }
-        public Guid UserId
+        public Guid? UserId
         {
             get
             {
-                return Context.CreateQuery("systemuser").Where(u => u["internalemailaddress"] == Email).FirstOrDefault().Id;
+                try
+                {
+                    return Context.CreateQuery("systemuser").Where(u => u["internalemailaddress"] == Email).FirstOrDefault().Id;
+                }
+                catch
+                {
+                    return null;
+                }
             }
         }
         public Entity Entity
         {
             get
             {
-                return Context.CreateQuery("systemuser").Where(u => u["internalemailaddress"] == Email).FirstOrDefault();
+                try
+                {
+                    return Context.CreateQuery("systemuser").Where(u => u["internalemailaddress"] == Email).FirstOrDefault();
+                }
+                catch
+                {
+                    return null;
+                }
             }
         }
-        public string UserLastName { 
-            get{
-                return Entity["lastname"].ToString();
+        public string UserLastName
+        {
+            get
+            {
+                try
+                {
+                    return Entity["lastname"].ToString();
+                }
+                catch
+                {
+                    return null;
+                }
             }
         }
 
