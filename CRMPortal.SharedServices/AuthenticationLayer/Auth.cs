@@ -37,7 +37,8 @@ namespace CRMPortal.SharedServices.AuthenticationLayer
         }
 
 
-
+      
+    
         //internal static UnitOfWork GetContext(Guid loggedInuserID)
         //{
         //    return UnitsOfWork[loggedInuserID];

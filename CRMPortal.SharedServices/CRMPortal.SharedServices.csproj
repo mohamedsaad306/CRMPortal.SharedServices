@@ -180,6 +180,7 @@
     <Content Include="Views\Account\Home.cshtml" />
     <Content Include="Views\HelpDesk\Index.cshtml" />
     <Content Include="Views\Account\Contacts.cshtml" />
+    <Content Include="Views\HelpDesk\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
