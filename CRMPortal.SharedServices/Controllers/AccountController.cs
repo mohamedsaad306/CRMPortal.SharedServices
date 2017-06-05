@@ -33,9 +33,14 @@ namespace CRMPortal.SharedServices.Controllers
             {
                 Session["LoggedInUser"] = acc.Email;
                 Session["LoggedInPassword"] = acc.Password;
-                Guid uid = uof.AccModel.UserId;
-                Session["LoggedInUserId"] = uid;
-
+                if (uof.AccModel.UserId != null)
+                {
+                    Session["LoggedInUserId"] = uof.AccModel.UserId;
+                }
+                else
+                {
+                    return RedirectToAction("Login", "Account");
+                }
             }
 
             AccountViewModel vm = new AccountViewModel { Acc = uof.AccModel };
@@ -48,19 +53,20 @@ namespace CRMPortal.SharedServices.Controllers
         {
             if (Session["LoggedInUserId"] == null)
                 return RedirectToAction("Login", "Account");
-            
-            
+
             //Guid loggedInuserID = new Guid(Session["LoggedInUser"].ToString());
             UnitOfWork uof = Auth.GetContext(Session["LoggedInUser"].ToString(), Session["LoggedInPassword"].ToString());
-            EntityReference ContactsOwner = new EntityReference("systemuser", uof.AccModel.UserId);
-            var contatcts = uof.ContactModel.GetContatsByOwner(ContactsOwner);
-            ContactViewModel vm = new ContactViewModel { ContactLastName = contatcts[0]["lastname"].ToString() };
+            if (uof.AccModel.UserId != null)
+            {
+                EntityReference ContactsOwner = new EntityReference("systemuser", (Guid)uof.AccModel.UserId);
+                var contatcts = uof.ContactModel.GetContatsByOwner(ContactsOwner);
+                ContactViewModel vm = new ContactViewModel { ContactLastName = contatcts[0]["lastname"].ToString() };
 
-            uof.Dispose();
-            return View("Contacts", vm);
+                uof.Dispose();
+                return View("Contacts", vm);
+            }
+            return RedirectToAction("Login", "Account");
         }
-
-
 
     }
 }

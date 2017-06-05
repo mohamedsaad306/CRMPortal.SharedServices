@@ -12,7 +12,7 @@ using System.Web.Mvc;
 
 namespace CRMPortal.SharedServices.Controllers
 {
-    public class HelpDeskController : Controller
+    public class PurchaseOrderController : Controller
     {
         private UnitOfWork uof;
 
@@ -29,22 +29,22 @@ namespace CRMPortal.SharedServices.Controllers
 
 
             uof = Auth.GetContext(Session["LoggedInUser"].ToString(), Session["LoggedInPassword"].ToString());
-            List<Entity> requests = uof.HelpDeskModel.GetAllRequests(new Guid(Session["LoggedInUserId"].ToString()));
+            List<Entity> requests = uof.PurchaseOrderModel.GetAllRequests(new Guid(Session["LoggedInUserId"].ToString()));
 
-            List<HelpDeskRequest> viewRequests = new List<HelpDeskRequest>();
+            List<PurchaseOrderRequest> viewRequests = new List<PurchaseOrderRequest>();
             foreach (var r in requests)
             {
-                viewRequests.Add(new HelpDeskRequest
+                viewRequests.Add(new PurchaseOrderRequest
                 {
                     CreatedAt = DateTime.Parse(r["createdon"].ToString()),
                     RequestTitle = r["new_name"].ToString(),
-                    RequestNumber = r["new_requestnumber"].ToString(),
-                    RequestDetails = r["new_requestdetails"].ToString(),
+                    //RequestNumber = r["new_requestnumber"].ToString(),
+                    NumberOfitems = r["new_numberofitems"].ToString(),
                     StatusReason = r["statuscode"].ToString()
                 });
             }
 
-            HelpDeskViewModel vm = new HelpDeskViewModel() { Requests = viewRequests };
+            PurchaseOrderViewModel vm = new PurchaseOrderViewModel() { Requests = viewRequests };
             uof.Dispose();
             return View(vm);
         }
