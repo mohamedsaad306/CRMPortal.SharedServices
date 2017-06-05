@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,11 +41,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Crm.Sdk.Proxy">
-      <HintPath>E:\Workspace\Graduation Project\Development\SDK\Bin\Microsoft.Crm.Sdk.Proxy.dll</HintPath>
+      <HintPath>F:\From Mina\iti 2016\The Begining\39- CRM\Lecture 5\SDK 2016\SDK\Bin\Microsoft.Crm.Sdk.Proxy.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Xrm.Sdk">
-      <HintPath>E:\Workspace\Graduation Project\Development\SDK\Bin\Microsoft.Xrm.Sdk.dll</HintPath>
+      <HintPath>F:\From Mina\iti 2016\The Begining\39- CRM\Lecture 5\SDK 2016\SDK\Bin\Microsoft.Xrm.Sdk.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
