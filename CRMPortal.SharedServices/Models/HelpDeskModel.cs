@@ -23,7 +23,7 @@ namespace CRMPortal.SharedServices.Models
         }
 
 
-        public string Name 
+        public string Titel 
         {
             get
             {
@@ -31,12 +31,11 @@ namespace CRMPortal.SharedServices.Models
             }
         }
 
-        public string   LastName 
+        public List<Entity> GetAllRequests(Guid usr_id)
         {
-            get
-            {
-                return Entity["lastname"].ToString();
-            }
+
+           return  Context.CreateQuery("new_helpdeskrequest").Where(r => r["new_relatedemployeeid"] == new EntityReference("systemuser", usr_id)).ToList();
         }
+       
     }
 }

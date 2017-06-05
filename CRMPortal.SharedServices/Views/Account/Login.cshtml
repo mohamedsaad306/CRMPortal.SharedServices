@@ -2,9 +2,19 @@
 @{
     ViewBag.Title = "Index";
 }
+ 
+@{
+    if (TempData["info"] != null)
+    {
+        <br />
+        <br />
+        <br />
+        <div class="alert alert-dismissible alert-danger">
 
-<h2>Index</h2>
-
+    <p class="">@TempData["info"].ToString()</p>
+        </div>
+    }  
+}
 
 <h2>Login</h2>
 

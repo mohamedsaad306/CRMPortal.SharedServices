@@ -12,6 +12,10 @@
 
 <h3>
     <label class="label label-info">Last Name</label>
-    @Html.DisplayFor(e => e.Acc.UserLastName, new { @class = "lable label-info" });
+    @Html.DisplayFor(e => e.Acc.UserLastName, new { @class = "lable label-info" })
 </h3>
-
+<br />
+<h3>
+@Html.ActionLink("Display Contacts", "GetContacts", "Account", new { }, new { @class = "btn btn-primary" })
+@Html.ActionLink("Help Desk ", "Index", "HelpDesk", new { }, new { @class = "btn btn-primary" })
+</h3>

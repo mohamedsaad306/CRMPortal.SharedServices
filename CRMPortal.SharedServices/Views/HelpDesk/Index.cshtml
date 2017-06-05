@@ -3,8 +3,9 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-@Html.DisplayFor(r => r.HDModel.Name, new { @class = "lable lable-primary" })
-<br />
-@Html.DisplayFor(r => r.HDModel.LastName, new { @class = "lable lable-primary" })
+@using (@Html.BeginForm("CreateRequest", "HelpDesk"))
+{
+
+
+}
 

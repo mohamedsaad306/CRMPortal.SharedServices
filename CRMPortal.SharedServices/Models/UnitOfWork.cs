@@ -18,6 +18,7 @@ namespace CRMPortal.SharedServices.Models
         {
             _context = ctx;
             AccModel = new AccountModel(_context);
+            
         }
         public void Dispose()
         {
@@ -26,5 +27,7 @@ namespace CRMPortal.SharedServices.Models
 
         public AccountModel AccModel { get; set; }
         public HelpDeskModel HelpDeskModel { get { return new HelpDeskModel(_context); }  }
+        public ContactModel ContactModel { get { return new ContactModel(_context); }  }
+
     }
 }

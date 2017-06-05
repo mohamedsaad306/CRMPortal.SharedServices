@@ -8,6 +8,6 @@ namespace CRMPortal.SharedServices.ViewModels
 {
     public class HelpDeskViewModel
     {
-        public HelpDeskModel HDModel { get; set; }
+        public List<HelpDeskModel> Requests { get; set; }
     }
 }
