@@ -127,6 +127,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HelpDeskController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="DomainModels\crmClass_5-6.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

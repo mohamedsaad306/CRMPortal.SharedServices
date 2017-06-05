@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using CRMPortal.SharedServices.Models;
+using CRMPortal.SharedServices.Models.DomainModels;
 
 namespace CRMPortal.SharedServices.ViewModels
 {
     public class HelpDeskViewModel
     {
-        public List<HelpDeskModel> Requests { get; set; }
+        public List<HelpDeskRequest> Requests { get; set; }
     }
 }
