@@ -21,4 +21,6 @@ namespace CRMPortal.SharedServices.ViewModels
         public string RequestDetails { get; set; }
         
     }
+
+
 }
