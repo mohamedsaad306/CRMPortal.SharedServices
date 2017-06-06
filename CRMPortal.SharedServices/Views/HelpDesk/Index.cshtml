@@ -1,9 +1,10 @@
-﻿@model CRMPortal.SharedServices.ViewModels.HelpDeskViewModel
+﻿@model CRMPortal.SharedServices.ViewModels.HelpDeskIndexViewModel
 @{
     ViewBag.Title = "Index";
 }
 
-
+@Html.ActionLink("New Reqest", "Edit", "HelpDesk", null, new { @class = "label label-success" }) 
+<br />
 <table class="table table-hover table-striped">
     <tr>
         <th>Title</th>
@@ -25,10 +26,5 @@
 </table>
 
 
-@*@using (@Html.BeginForm("CreateRequest", "HelpDesk"))
-    {
-
-
-    }*@
 
 
