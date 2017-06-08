@@ -34,17 +34,25 @@ namespace CRMPortal.SharedServices.Controllers
             List<PurchaseOrderRequest> viewRequests = new List<PurchaseOrderRequest>();
             foreach (var r in requests)
             {
-                viewRequests.Add(new PurchaseOrderRequest
+                try
                 {
-                    CreatedAt = DateTime.Parse(r["createdon"].ToString()),
-                    RequestTitle = r["new_name"].ToString(),
-                    RequestNumber = r["new_requestnumber"].ToString(),
-                    NumberOfitems = r["new_numberofitems"].ToString(),
-                    StatusReason = r.FormattedValues["statuscode"].ToString()
-                });
+                    viewRequests.Add(new PurchaseOrderRequest
+                    {
+                        CreatedAt = DateTime.Parse(r["createdon"].ToString()),
+                        RequestTitle = r["new_name"].ToString(),
+                        RequestNumber = r["new_requestnumber"].ToString(),
+                        NumberOfitems = r["new_numberofitems"].ToString(),
+                        StatusReason = r.FormattedValues["statuscode"].ToString()
+                    });
+                }
+                catch (KeyNotFoundException)
+                {
+                    TempData["info"] = "Some Data Wasn't ready Please refresh this page again in few seconds ... ";
+                    continue;
+                }
             }
 
-            PurchaseOrderViewModel vm = new PurchaseOrderViewModel() { Requests =   viewRequests };
+            PurchaseOrderViewModel vm = new PurchaseOrderViewModel() { Requests = viewRequests };
             uof.Dispose();
             return View(vm);
         }
@@ -55,28 +63,41 @@ namespace CRMPortal.SharedServices.Controllers
         }
 
         //[HttpPost]
-        public ActionResult Save(PurchaseOrderFormViewModel _r)
+        public ActionResult Save(PurchaseOrderFormViewModel _r, string saveOrDraft)
         {
-            if (Session["LoggedInUserId"] == null)
-            {
-                TempData["info"] = "Please Login to Access this Page.. ";
-                return RedirectToAction("Login", "Account");
-            }
-
-            uof = Auth.GetContext(Session["LoggedInUser"].ToString(), Session["LoggedInPassword"].ToString());
-
-            Entity req = new Entity("new_helpdeskrequest");
-            req["new_name"] = _r.RequestTitle;
-            req["new_numberofitems"] = _r.NumberOfitems;
-            req["statuscode"] = _r.Status;
-            //req["new_action"] = new OptionSetValue(100000000);
-
-            Guid uid = new Guid(Session["LoggedInUserId"].ToString());
-            req["new_relatedemployeeid"] = new EntityReference("systemuser", uid);
-
-            uof.PurchaseOrderModel.SubmitRequest(req);
-            return RedirectToAction("index");
+            return SaveOrDraft(_r, saveOrDraft == "Submit Request" ? 100000001 : 100000000);
         }
+        ActionResult SaveOrDraft(PurchaseOrderFormViewModel _r, int actionNumber)
+        {
+            try
+            {
+                if (Session["LoggedInUserId"] == null)
+                {
+                    TempData["info"] = "Please Login to Access this Page.. ";
+                    return RedirectToAction("Login", "Account");
+                }
 
+                uof = Auth.GetContext(Session["LoggedInUser"].ToString(), Session["LoggedInPassword"].ToString());
+
+                Entity req = new Entity("new_purchaserequest");
+                req["new_name"] = _r.RequestTitle;
+                req["new_numberofitems"] = int.Parse(_r.NumberOfitems);
+                req["new_itemname"] = _r.ItemName;
+                req["new_actions"] = new OptionSetValue(actionNumber);
+
+                Guid uid = new Guid(Session["LoggedInUserId"].ToString());
+                req["new_relatedemployeeid"] = new EntityReference("systemuser", uid);
+
+                uof.PurchaseOrderModel.SubmitRequest(req);
+                TempData["info"] = _r.SaveOrDraft;
+                return RedirectToAction("index");
+                //new_purchaserequest p = new new_purchaserequest();
+            }
+            catch (Exception ex)
+            {
+                TempData["info"] = string.Format("Error: {0}", ex.Message);
+                return RedirectToAction("Edit");
+            }
+        }
     }
 }

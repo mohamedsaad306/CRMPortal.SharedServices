@@ -204,10 +204,10 @@
     <Content Include="Views\Account\Contacts.cshtml" />
     <Content Include="Views\HelpDesk\Edit.cshtml" />
     <Content Include="Views\PurchaseOrder\Index.cshtml" />
-<<<<<<< HEAD
-=======
+ 
+ 
     <Content Include="Views\PurchaseOrder\Edit.cshtml" />
->>>>>>> origin/master
+ 
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

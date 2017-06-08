@@ -13,21 +13,19 @@ namespace CRMPortal.SharedServices.ViewModels
         public List<PurchaseOrderRequest> Requests { get; set; }
     }
 
-
     public class PurchaseOrderFormViewModel
     {
         [Display(Name = "Title")]
         public string RequestTitle { get; set; }
 
-        [Display(Name = "Details")]
-        public string RequestDetails { get; set; }
+        [Display(Name = "SaveOrDraft")]
+        public string SaveOrDraft { get; set; }
         [Display(Name = "# Items")]
         public string NumberOfitems { get; set; }
         [Display(Name = "Status")]
         public string Status { get; set; }
-        [Display(Name = "Created Date")]
-        [DataType(DataType.Date)]
-        public DateTime CreatedAt { get; set; }
+        [Display(Name = "Item Name")]
+        public string ItemName { get; set; }
         [Display(Name = "Status Reason")]
         public string StatusReason { get; set; }
 

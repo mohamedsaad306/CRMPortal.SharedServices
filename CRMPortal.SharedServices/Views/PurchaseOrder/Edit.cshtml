@@ -18,7 +18,6 @@
 
                 <div>
                     @Html.ActionLink("List of all Purchase Orders", "Index", "PurchaseOrder", new { @class = "btn btn-info btn-pressure" })
-
                 </div>
                 <br />
 
@@ -43,30 +42,31 @@
                             <div class="col-md-6 col-sm-6">
                                 @Html.TextBoxFor(m => m.NumberOfitems, new { @class = "form-control" })
                             </div>
-
-
                         </div>
+
                         <div class="form-group">
                             <div class="col-md-6 col-sm-6">
-                                @Html.LabelFor(m => m.CreatedAt)
+                                @Html.LabelFor(m => m.ItemName)
 
                             </div>
                             <div class="col-md-6 col-sm-6">
-                                @Html.EditorFor(m => m.CreatedAt, new { @class = "form-control" })
+                                @Html.TextBoxFor(m => m.ItemName, new { @class = "form-control" })
                             </div>
                         </div>
-
 
 
                     </div>
 
                     <div class="row">
                         <div class="col-md-12">
-
-                            <input type="submit" name="name" value="Submit Request" class="btn btn-primary" />
+                            <input type="submit" name="saveOrDraft" value="Submit Request" class="btn btn-primary"/>
+                            <input type="submit" name="saveOrDraft" value="Save as Draft" class="btn btn-default"/>
+                            @Html.ActionLink("Cancel", "Index", "PurchaseOrder", new { @class = "btn btn-default" })
                             @* @Html.ActionLink("Save", "Save", "PurchaseOrder", new { @class = "btn btn-success" })*@
-                            @Html.ActionLink("Cancel", "Index", "PurchaseOrder", new { @class = "btn btn-danger" })
+                            @*@Html.ActionLink("Save as Draft", "Draft", "PurchaseOrder", new { @class = "btn btn-default" })*@
+                           @* @Html.HiddenFor(m => m.SaveOrDraft)*@
 
+                            @*<input type="hidden" id="savedraft" name="SaveOrDraft" value="" />*@
                         </div>
                     </div>
 
