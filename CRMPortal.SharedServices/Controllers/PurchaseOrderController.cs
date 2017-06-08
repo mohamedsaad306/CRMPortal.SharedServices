@@ -18,7 +18,7 @@ namespace CRMPortal.SharedServices.Controllers
 
 
         //
-        // GET: /HelpDesk/
+        // GET: /PurchaseOrder/
         public ActionResult Index()
         {
             if (Session["LoggedInUserId"] == null)
@@ -48,5 +48,35 @@ namespace CRMPortal.SharedServices.Controllers
             uof.Dispose();
             return View(vm);
         }
+
+        public ActionResult Edit(Guid? id)
+        {
+            return View();
+        }
+
+        //[HttpPost]
+        public ActionResult Save(PurchaseOrderFormViewModel _r)
+        {
+            if (Session["LoggedInUserId"] == null)
+            {
+                TempData["info"] = "Please Login to Access this Page.. ";
+                return RedirectToAction("Login", "Account");
+            }
+
+            uof = Auth.GetContext(Session["LoggedInUser"].ToString(), Session["LoggedInPassword"].ToString());
+
+            Entity req = new Entity("new_helpdeskrequest");
+            req["new_name"] = _r.RequestTitle;
+            req["new_numberofitems"] = _r.NumberOfitems;
+            req["statuscode"] = _r.Status;
+            req["new_action"] = new OptionSetValue(100000000);
+
+            Guid uid = new Guid(Session["LoggedInUserId"].ToString());
+            req["new_relatedemployeeid"] = new EntityReference("systemuser", uid);
+
+            uof.PurchaseOrderModel.SubmitRequest(req);
+            return RedirectToAction("index");
+        }
+
     }
 }

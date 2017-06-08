@@ -4,25 +4,25 @@
 }
 
 
-<table class="table table-hover table-striped">
-    <tr>
-        <th>Title</th>
-        <th>Request Number </th>
-        <th>#Items</th>
-        <th>Status</th>
-    </tr>
-    @{
-        foreach (var r in Model.Requests)
-        {
-            <tr>
-                <td>@r.RequestTitle</td>
-                <td>@r.RequestNumber</td>
-                <td>@r.NumberOfitems</td>
-                <td>@r.StatusReason</td>
-            </tr>
+@*<table class="table table-hover table-striped">
+        <tr>
+            <th>Title</th>
+            <th>Request Number </th>
+            <th>#Items</th>
+            <th>Status</th>
+        </tr>
+        @{
+            foreach (var r in Model.Requests)
+            {
+        <tr>
+            <td>@r.RequestTitle</td>
+            <td>@r.RequestNumber</td>
+            <td>@r.NumberOfitems</td>
+            <td>@r.StatusReason</td>
+        </tr>
+            }
         }
-    }
-</table>
+    </table>*@
 
 
 @*@using (@Html.BeginForm("CreateRequest", "HelpDesk"))
@@ -30,5 +30,46 @@
 
 
     }*@
+
+<div class="container">
+
+    <div class="clearfix"></div>
+
+    <fieldset>
+        <legend class="legend">Purchase Order</legend>
+
+        <div class="panel">
+
+            <div class="panel-body">
+
+                <div>
+                    @Html.ActionLink("Create Purchase Order", "Edit", "PurchaseOrder", new { @class = "btn btn-info btn-pressure" })
+                </div>
+                <div style="margin-top: 10px"></div>
+
+                <table class="table table-hover table-striped">
+                    <tr>
+                        <th>Title</th>
+                        <th>Request Number </th>
+                        <th>#Items</th>
+                        <th>Status</th>
+                    </tr>
+                    @{
+                        foreach (var r in Model.Requests)
+                        {
+                            <tr>
+                                <td>@r.RequestTitle</td>
+                                <td>@r.RequestNumber</td>
+                                <td>@r.NumberOfitems</td>
+                                <td>@r.StatusReason</td>
+                            </tr>
+                        }
+                    }
+                </table>
+
+            </div>
+        </div>
+    </fieldset>
+</div>
 
 

@@ -37,5 +37,10 @@ namespace CRMPortal.SharedServices.Models
             return Context.CreateQuery("new_purchaserequest")/*.Where(r => r["new_relatedemployeeid"] == new EntityReference("systemuser", usr_id))*/.ToList();
         }
 
+        internal void SubmitRequest(Entity req)
+        {
+            Context.AddObject(req);
+            Context.SaveChanges();
+        }
     }
 }

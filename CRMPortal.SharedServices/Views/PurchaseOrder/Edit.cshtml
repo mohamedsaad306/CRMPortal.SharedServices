@@ -1,0 +1,82 @@
+﻿@model CRMPortal.SharedServices.ViewModels.PurchaseOrderFormViewModel
+@{
+    ViewBag.Title = "Save";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Initiate New Purchase Order Request</h2>
+
+<div class="container">
+
+    @using (Html.BeginForm("Save", "PurchaseOrder"))
+    {
+        //@Html.AntiForgeryToken()
+        <fieldset>
+            <legend class="legend">Purchase Order</legend>
+
+            <div class="panel">
+
+                <div class="panel-body">
+
+                    <div>
+                        @Html.ActionLink("List of all Purchase Orders", "Index", "PurchaseOrder", new { @class = "btn btn-info btn-pressure" })
+
+                    </div>
+                    <br />
+
+                    <div class="col-md-6 col-sm-6">
+                        <div class="row">
+
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-6">
+                                    @Html.LabelFor(m => m.RequestTitle)
+                                </div>
+
+                                <div class="col-md-6 col-sm-6">
+                                    @Html.TextBoxFor(m => m.RequestTitle, new { @class = "form-control" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-6">
+                                    @Html.LabelFor(m => m.NumberOfitems)
+
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    @Html.TextBoxFor(m => m.NumberOfitems, new { @class = "form-control" })
+                                </div>
+
+
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-6">
+                                    @Html.LabelFor(m => m.CreatedAt)
+
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    @Html.EditorFor(m => m.CreatedAt, new { @class = "form-control" })
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                @Html.ActionLink("Save", "Save", "PurchaseOrder", new { @class = "btn btn-success" })
+                                @Html.ActionLink("Cancel", "Index", "PurchaseOrder", new { @class = "btn btn-danger" })
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+
+        </fieldset>
+    }
+</div>

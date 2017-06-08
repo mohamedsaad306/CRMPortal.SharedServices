@@ -25,7 +25,7 @@ namespace CRMPortal.SharedServices.Controllers
 
 
         [HttpPost]
-        public ActionResult Login(AccountViewModel acc)
+        public ActionResult Login(AccountViewModel acc, string x)
         {
 
             UnitOfWork uof = Auth.GetContext(acc.Email, acc.Password);
@@ -39,6 +39,7 @@ namespace CRMPortal.SharedServices.Controllers
                 }
                 else
                 {
+                    TempData["info"] = "Username / Password Incorrect!";
                     return RedirectToAction("Login", "Account");
                 }
             }
