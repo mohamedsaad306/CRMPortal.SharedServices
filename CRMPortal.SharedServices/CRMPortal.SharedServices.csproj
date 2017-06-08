@@ -186,6 +186,7 @@
     <Content Include="Views\HelpDesk\Index.cshtml" />
     <Content Include="Views\Account\Contacts.cshtml" />
     <Content Include="Views\HelpDesk\Edit.cshtml" />
+    <Content Include="Views\PurchaseOrder\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
