@@ -38,13 +38,13 @@ namespace CRMPortal.SharedServices.Controllers
                 {
                     CreatedAt = DateTime.Parse(r["createdon"].ToString()),
                     RequestTitle = r["new_name"].ToString(),
-                    //RequestNumber = r["new_requestnumber"].ToString(),
+                    RequestNumber = r["new_requestnumber"].ToString(),
                     NumberOfitems = r["new_numberofitems"].ToString(),
-                    StatusReason = r["statuscode"].ToString()
+                    StatusReason = r.FormattedValues["statuscode"].ToString()
                 });
             }
 
-            PurchaseOrderViewModel vm = new PurchaseOrderViewModel() { Requests = viewRequests };
+            PurchaseOrderViewModel vm = new PurchaseOrderViewModel() { Requests =   viewRequests };
             uof.Dispose();
             return View(vm);
         }
