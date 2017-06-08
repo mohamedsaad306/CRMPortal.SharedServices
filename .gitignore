@@ -155,4 +155,8 @@ $RECYCLE.BIN/
 # Mac desktop service store files
 .DS_Store
 *.csproj
+<<<<<<< HEAD
 *.csproj
+=======
+CRMPortal.SharedServices/CRMPortal.SharedServices.csproj
+>>>>>>> 39f829b21ea98ec082714e03c836abd606a6c8de
