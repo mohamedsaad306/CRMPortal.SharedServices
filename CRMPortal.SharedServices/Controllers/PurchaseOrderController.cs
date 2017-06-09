@@ -40,7 +40,7 @@ namespace CRMPortal.SharedServices.Controllers
                     {
                         CreatedAt = DateTime.Parse(r["createdon"].ToString()),
                         RequestTitle = r["new_name"].ToString(),
-                        RequestNumber = r["new_requestnumber"].ToString(),
+                        RequestNumber =(r.Contains("new_requestnumber"))? r["new_requestnumber"].ToString():string.Empty,
                         NumberOfitems = r["new_numberofitems"].ToString(),
                         StatusReason = r.FormattedValues["statuscode"].ToString()
                     });
