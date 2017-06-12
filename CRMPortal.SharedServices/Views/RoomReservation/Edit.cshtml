@@ -2,22 +2,80 @@
 @{
     ViewBag.Title = "Edit";
 }
+@section MyHead{
+    <script type="text/javascript" src="/scripts/jquery-3.1.1.js"></script>
+    <script type="text/javascript" src="/scripts/moment.min.js"></script>
+    <script type="text/javascript" src="/scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/scripts/bootstrap-datetimepicker.js"></script>
+    <link rel="stylesheet" href="/Content/bootstrap-datetimepicker.css" />
+
+}
 
 <h2>Edit</h2>
+
 @using (@Html.BeginForm("Save", "RoomReservation"))
 {
+
     <div class="form-group">
-        <div class="form-group input-group-sm">
-            @Html.LabelFor(model => model.DateFrom)
-            @Html.TextBoxFor(model => model.DateFrom, new { @class = "form-control datepicker"})    
-        </div>
-
-        <input type="submit" name="name" value="Submit Request" class="btn btn-primary" />
-
+        @Html.LabelFor(e => e.RoomToReserve)
+        @Html.DropDownListFor(e => e.RoomToReserve, new SelectList(Model.AvailableRooms, "Id", "Name"), "Select Room", new { @class = "form-control" })
     </div>
+
+    <div class="form-group ">
+        @Html.LabelFor(r => r.Day)
+        <div class="input-group date" id="dayPicker">
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+            @Html.TextBoxFor(model => model.Day, new { @class = "form-control datepicker ", placeholder = "Select Day " })
+        </div>
+    </div>
+
+
+    <div class="form-group ">
+        @Html.LabelFor(r => r.DateFrom)
+        <div class="input-group date" id="timeFrom">
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-time"></span>
+            </span>
+            @Html.TextBoxFor(model => model.DateFrom, new { @class = "form-control datepicker " })
+        </div>
+    </div>
+
+    <div class="form-group ">
+        @Html.LabelFor(r => r.DateTo)
+        <div class="input-group date" id="timeTo">
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-time"></span>
+            </span>
+            @Html.TextBoxFor(model => model.DateTo, new { @class = "form-control datepicker " })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(r => r.RequestTitle)
+        @Html.TextBoxFor(r => r.RequestTitle, new { @class = "form-control " })
+    </div>
+
+    <input type="submit" name="name" value="Submit Request" class="btn btn-primary" />
+
 }
 
 @section MyJs{
-     $('.datepicker').datepicker(); //Initialise any date pickers
+
+    $('#dayPicker').datetimepicker({
+    format:'YYYY/MM/DD'
+    });
+
+    $('#timeFrom').datetimepicker({
+    format:'LT',
+ 
+    });
+
+    $('#timeTo').datetimepicker({
+    format:'LT',
+  
+    });
+
+ 
+
 }
-    

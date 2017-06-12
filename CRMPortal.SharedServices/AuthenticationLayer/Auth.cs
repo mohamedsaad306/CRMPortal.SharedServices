@@ -29,7 +29,10 @@ namespace CRMPortal.SharedServices.AuthenticationLayer
             
             OrganizationServiceContext context = new OrganizationServiceContext(orgService);
             //Guid loggedInUserId = context.CreateQuery("systemuser").Where(u => u["internalemailaddress"] == email).FirstOrDefault().Id;
-            UnitOfWork uof = new UnitOfWork(context);
+            serviceProxy.EnableProxyTypes();
+            UnitOfWork uof = new UnitOfWork(context,orgService);
+
+            uof.OrganizaionService = orgService;
             uof.AccModel.Email = _email;
             Guid? uid = uof.AccModel.UserId;
             //UnitsOfWork.Add(uid, uof);
@@ -43,5 +46,10 @@ namespace CRMPortal.SharedServices.AuthenticationLayer
         //{
         //    return UnitsOfWork[loggedInuserID];
         //}
+
+        internal static IOrganizationService GetOrgService()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

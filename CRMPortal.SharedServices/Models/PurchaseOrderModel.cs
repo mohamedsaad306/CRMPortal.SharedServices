@@ -9,8 +9,8 @@ namespace CRMPortal.SharedServices.Models
 {
     public class PurchaseOrderModel : Repository
     {
-        public PurchaseOrderModel(OrganizationServiceContext ctx)
-            : base(ctx)
+        public PurchaseOrderModel(OrganizationServiceContext ctx, IOrganizationService orgService)
+            : base(ctx, orgService)
         {
         }
 

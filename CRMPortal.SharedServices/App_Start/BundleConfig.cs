@@ -17,10 +17,15 @@ namespace CRMPortal.SharedServices
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+                      "~/Scripts/jquery-3.1.1.js",
                       "~/Scripts/bootstrap.js",
+                      "~/Scripts/bootstrap-datetimepicker.js",
+                      "~/Scripts/moment.js",
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
+                      "~/Content/bootstrap.min.css",
+                      "~/Content/bootstrap-datetimepicker.css",
                       "~/Content/bootstrap-luman.css",
                       "~/Content/site.css"));
         }

@@ -9,8 +9,8 @@ namespace CRMPortal.SharedServices.Models
     public class AccountModel : Repository
     {
 
-        public AccountModel(OrganizationServiceContext ctx)
-            : base(ctx)
+        public AccountModel(OrganizationServiceContext ctx, IOrganizationService orgService)
+            : base(ctx,orgService)
         {
         }
 

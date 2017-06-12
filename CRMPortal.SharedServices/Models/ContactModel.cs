@@ -9,8 +9,8 @@ namespace CRMPortal.SharedServices.Models
 {
     public class ContactModel : Repository
     {
-        public ContactModel(OrganizationServiceContext ctx)
-            : base(ctx)
+        public ContactModel(OrganizationServiceContext ctx, IOrganizationService orgService)
+            : base(ctx, orgService)
         {
         }
         public List<Entity> GetContatsByOwner(EntityReference ownerId)

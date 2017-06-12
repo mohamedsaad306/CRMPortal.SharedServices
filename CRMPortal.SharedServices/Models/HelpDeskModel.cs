@@ -9,8 +9,8 @@ namespace CRMPortal.SharedServices.Models
 {
     public class HelpDeskModel:Repository
     {
-        public HelpDeskModel(OrganizationServiceContext ctx)
-            : base(ctx)
+        public HelpDeskModel(OrganizationServiceContext ctx,IOrganizationService orgService)
+            : base(ctx,orgService)
         {
         }
         public List<Entity> GetAllRequests(Guid usr_id)
