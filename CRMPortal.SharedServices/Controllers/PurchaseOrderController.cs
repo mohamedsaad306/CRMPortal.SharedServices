@@ -36,13 +36,23 @@ namespace CRMPortal.SharedServices.Controllers
             {
                 try
                 {
+                    //bool x = r.Attributes.Keys.Contains("new_name");
                     viewRequests.Add(new PurchaseOrderRequest
                     {
+<<<<<<< HEAD
+                        CreatedAt = r.Attributes.Keys.Contains("createdon") ? DateTime.Parse(r["createdon"].ToString()) : new DateTime(),
+                        RequestTitle = r.Attributes.Keys.Contains("new_name") ? r["new_name"].ToString() : "",
+                        RequestNumber = r.Attributes.Keys.Contains("new_requestnumber") ? r["new_requestnumber"].ToString() : "",
+                        NumberOfitems = r.Attributes.Keys.Contains("new_numberofitems") ? r["new_numberofitems"].ToString() : "",
+                        Purpose = r.Attributes.Keys.Contains("new_purpose") ? r["new_purpose"].ToString() : "",
+                        StatusReason = r.Attributes.Keys.Contains("statuscode") ? r.FormattedValues["statuscode"].ToString() : ""
+=======
                         CreatedAt = DateTime.Parse(r["createdon"].ToString()),
                         RequestTitle = r["new_name"].ToString(),
                         RequestNumber =(r.Contains("new_requestnumber"))? r["new_requestnumber"].ToString():string.Empty,
                         NumberOfitems = r["new_numberofitems"].ToString(),
                         StatusReason = r.FormattedValues["statuscode"].ToString()
+>>>>>>> 898e6793cda1d4fcc87347dd0e273137f68d4ff0
                     });
                 }
                 catch (KeyNotFoundException)
@@ -83,6 +93,7 @@ namespace CRMPortal.SharedServices.Controllers
                 req["new_name"] = _r.RequestTitle;
                 req["new_numberofitems"] = int.Parse(_r.NumberOfitems);
                 req["new_itemname"] = _r.ItemName;
+                req["new_purpose"] = _r.Purpose;
                 req["new_actions"] = new OptionSetValue(actionNumber);
 
                 Guid uid = new Guid(Session["LoggedInUserId"].ToString());

@@ -1,6 +1,6 @@
 ﻿@model CRMPortal.SharedServices.ViewModels.PurchaseOrderFormViewModel
 @{
-    ViewBag.Title = "Save";
+    ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -54,17 +54,26 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6">
+                                @Html.LabelFor(m => m.Purpose)
+                            </div>
+
+                            <div class="col-md-6 col-sm-6">
+                                @Html.TextBoxFor(m => m.Purpose, new { @class = "form-control" })
+                            </div>
+                        </div>
 
                     </div>
 
                     <div class="row">
                         <div class="col-md-12">
-                            <input type="submit" name="saveOrDraft" value="Submit Request" class="btn btn-primary"/>
-                            <input type="submit" name="saveOrDraft" value="Save as Draft" class="btn btn-default"/>
+                            <input type="submit" name="saveOrDraft" value="Submit Request" class="btn btn-primary" />
+                            <input type="submit" name="saveOrDraft" value="Save as Draft" class="btn btn-default" />
                             @Html.ActionLink("Cancel", "Index", "PurchaseOrder", new { @class = "btn btn-default" })
                             @* @Html.ActionLink("Save", "Save", "PurchaseOrder", new { @class = "btn btn-success" })*@
                             @*@Html.ActionLink("Save as Draft", "Draft", "PurchaseOrder", new { @class = "btn btn-default" })*@
-                           @* @Html.HiddenFor(m => m.SaveOrDraft)*@
+                            @* @Html.HiddenFor(m => m.SaveOrDraft)*@
 
                             @*<input type="hidden" id="savedraft" name="SaveOrDraft" value="" />*@
                         </div>
