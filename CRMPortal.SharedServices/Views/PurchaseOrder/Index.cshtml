@@ -20,12 +20,13 @@
                 </div>
                 <div style="margin-top: 10px"></div>
 
-                <table class="table table-hover table-striped">
+                <table class="table table-hover table-striped" id="table">
                     <tr>
                         <th>Title</th>
                         <th>Request Number </th>
                         <th>#Items</th>
                         <th>Status</th>
+                        <th> </th>
                     </tr>
                     @{
                         foreach (var r in Model.Requests)
@@ -35,6 +36,9 @@
                                 <td>@r.RequestNumber</td>
                                 <td>@r.NumberOfitems</td>
                                 <td>@r.StatusReason</td>
+                                <td>
+                                    <input type="button" data-id="@r.RequestNumber" value="@r.GetButtonValue" class="btn btn-@r.GetButtonClass" />
+                                </td>
                             </tr>
                         }
                     }
@@ -45,4 +49,11 @@
     </fieldset>
 </div>
 
-
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    (function () {
+       
+        $("#table").on("click", "input", function (data) { console.log(data.target) })
+        //console.log(document.getElementById('btn').getAttribute('data-id'));
+    })();
+</script>

@@ -16,7 +16,7 @@ namespace CRMPortal.SharedServices.Models
 
         public List<Entity> GetAllRequests(Guid usr_id)
         {
-            return Context.CreateQuery("new_purchaserequest")/*.Where(r => r["new_relatedemployeeid"] == new EntityReference("systemuser", usr_id))*/.ToList();
+            return Context.CreateQuery("new_purchaserequest").Where(r => (r["new_relatedemployeeid"] == new EntityReference("systemuser", usr_id)) || (r["createdby"] == new EntityReference("systemuser", usr_id))).ToList();
         }
 
         internal void SubmitRequest(Entity req)
