@@ -1,0 +1,23 @@
+﻿@model CRMPortal.SharedServices.ViewModels.RoomReservationFormViewModel
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+@using (@Html.BeginForm("Save", "RoomReservation"))
+{
+    <div class="form-group">
+        <div class="form-group input-group-sm">
+            @Html.LabelFor(model => model.DateFrom)
+            @Html.TextBoxFor(model => model.DateFrom, new { @class = "form-control datepicker"})    
+        </div>
+
+        <input type="submit" name="name" value="Submit Request" class="btn btn-primary" />
+
+    </div>
+}
+
+@section MyJs{
+     $('.datepicker').datepicker(); //Initialise any date pickers
+}
+    

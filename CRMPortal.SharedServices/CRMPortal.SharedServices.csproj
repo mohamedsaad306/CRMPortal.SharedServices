@@ -129,6 +129,7 @@
     <Compile Include="Controllers\HelpDeskController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PurchaseOrderController.cs" />
+    <Compile Include="Controllers\RoomReservationController.cs" />
     <Compile Include="DomainModels\crmClass_5-6.cs" />
     <Compile Include="DomainModels\PurchaseOrderRequest.cs" />
     <Compile Include="DomainModels\Request.cs" />
@@ -142,12 +143,14 @@
     <Compile Include="Models\HelpDeskModel.cs" />
     <Compile Include="Models\PurchaseOrderModel.cs" />
     <Compile Include="Models\Repository.cs" />
+    <Compile Include="Models\RoomReservationModel.cs" />
     <Compile Include="Models\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AccountViewModel.cs" />
     <Compile Include="ViewModels\ContactViewModel.cs" />
     <Compile Include="ViewModels\HelpDeskViewModel.cs" />
     <Compile Include="ViewModels\PurchaseOrderViewModel.cs" />
+    <Compile Include="ViewModels\RoomReservationViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-luman.css" />
@@ -205,6 +208,12 @@
     <Content Include="Views\HelpDesk\Edit.cshtml" />
     <Content Include="Views\PurchaseOrder\Index.cshtml" />
     <Content Include="Views\PurchaseOrder\Edit.cshtml" />
+<<<<<<< HEAD
+=======
+    <Content Include="Views\PurchaseOrder\Edit.cshtml" />
+    <Content Include="Views\RoomReservation\Index.cshtml" />
+    <Content Include="Views\RoomReservation\Edit.cshtml" />
+>>>>>>> 898e6793cda1d4fcc87347dd0e273137f68d4ff0
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

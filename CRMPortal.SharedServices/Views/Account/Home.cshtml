@@ -4,17 +4,17 @@
     ViewBag.Title = "Home";
 }
 
-
-@Html.LabelFor(e => e.Acc.Entity.Id, new { @class = "lable label-info" })
-@Html.DisplayFor(e => e.Acc.Entity.Id, new { @class = "lable label-info" })
-
-
 <h3>
-    <label class="label label-info">Last Name</label>
+    <label class="">Welcome </label>
     @Html.DisplayFor(e => e.Acc.UserLastName, new { @class = "lable label-info" })
 </h3>
 <br />
 <h3>
-@Html.ActionLink("Display Contacts", "GetContacts", "Account", new { }, new { @class = "btn btn-primary" })
-@Html.ActionLink("Help Desk ", "Index", "HelpDesk", new { }, new { @class = "btn btn-primary" })
+@*@Html.ActionLink("Display Contacts", "GetContacts", "Account", new { }, new { @class = "btn btn-primary" })*@
+    
+@Html.ActionLink("Help Desk Request", "Index", "HelpDesk", new { }, new { @class = "btn btn-primary" })
+ 
+@Html.ActionLink("Purchase Order", "Index", "PurchaseOrder", new { }, new { @class = "btn btn-primary" })
+ 
+@Html.ActionLink("Room Reservation ", "Index", "RoomReservation", new { }, new { @class = "btn btn-primary" })
 </h3>
