@@ -38,7 +38,16 @@ namespace CRMPortal.SharedServices.AuthenticationLayer
             //UnitsOfWork.Add(uid, uof);
             return uof;
         }
+        /// <summary>
+        /// This returns the context for the system administrator with previlage to read all records 
+        /// and hass full control 
+        /// </summary>
+        /// <returns>UnitOfWork</returns>
+        public static UnitOfWork GetSystemAdminContext()
+        {
 
+            return GetContext("msaad@ITIGPproject.onmicrosoft.com", "P@ssw0rd");
+        }
 
       
     
