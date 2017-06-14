@@ -33,6 +33,10 @@ namespace CRMPortal.SharedServices.Controllers
             {
                 Session["LoggedInUser"] = acc.Email;
                 Session["LoggedInPassword"] = acc.Password;
+                string sessionId = HttpContext.Session.SessionID;
+                
+                
+
                 if (uof.AccModel.UserId != null)
                 {
                     Session["LoggedInUserId"] = uof.AccModel.UserId;

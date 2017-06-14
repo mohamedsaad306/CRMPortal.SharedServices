@@ -18,7 +18,8 @@
 
     <div class="form-group">
         @Html.LabelFor(e => e.RoomToReserve)
-        @Html.DropDownListFor(e => e.RoomToReserve, new SelectList(Model.AvailableRooms, "Id", "Name"), "Select Room", new { @class = "form-control" })
+        @Html.DropDownListFor(e => e.RoomToReserve, new SelectList(Model.AvailableRooms, "Id", "Name"), "Select Room", new { @class = "form-control", id = "selected-room" })
+        <lable id="check-button" class="btn btn-primary">Check Room reservations</lable>
     </div>
 
     <div class="form-group ">
@@ -27,7 +28,7 @@
             <span class="input-group-addon">
                 <span class="glyphicon glyphicon-calendar"></span>
             </span>
-            @Html.TextBoxFor(model => model.Day, new { @class = "form-control datepicker ", placeholder = "Select Day " })
+            @Html.TextBoxFor(model => model.Day, new { @class = "form-control datepicker ", placeholder = "Select Day ", id = "reservation-day" })
         </div>
     </div>
 
@@ -48,7 +49,7 @@
             <span class="input-group-addon">
                 <span class="glyphicon glyphicon-time"></span>
             </span>
-            @Html.TextBoxFor(model => model.DateTo, new { @class = "form-control datepicker " })
+            @Html.TextBoxFor(model => model.DateTo, new { @class = "form-control datepicker ", id = "date-to" })
         </div>
     </div>
     <div class="form-group">
@@ -62,20 +63,77 @@
 
 @section MyJs{
 
+    $("#check-button").on("click",CheckAvailability);
+
     $('#dayPicker').datetimepicker({
     format:'YYYY/MM/DD'
     });
 
     $('#timeFrom').datetimepicker({
     format:'LT',
- 
+
     });
 
     $('#timeTo').datetimepicker({
     format:'LT',
-  
+
     });
 
- 
+    @*function CheckAvailability() {
+    var roomId = $("#selected-room").val();
+    var reservationDay = $("#reservation-day").val()+" "+$("#date-to").val();
+    if (roomId != "" && reservationDay != "") {
+
+    $.ajax({
+    type: "POST",
+    url: "/api/roomreservations/CheckRoomAvailability/?_reservationDay="+reservationDay+"&_roomId="+roomId,
+    contentType: "application/json; charset=utf-8",
+    success: function (result) {
+    //do something
+    console.log(result);
+    },
+    error: function (req, status, error) {
+    //error
+    console.log(result);
+    console.log(status);
+    console.log(error);
+    }
+    });
+    }
+    console.log(roomId);
+    console.log(reservationDay);
+    }*@
+
+    function CheckAvailability() {
+    var roomId = $("#selected-room").val();
+    var reservationDay = $("#reservation-day").val()+" "+$("#date-to").val();
+    if (roomId != "" && reservationDay != "") {
+
+        $.ajax({
+            type: "POST",
+            url: "/api/roomreservations/CheckRoomAvailability/",
+            contentType: "application/json; charset=utf-8",
+            data: ({
+                _reservationDay: reservationDay,
+                _roomId: roomId
+            }),
+
+            success: function (result) {
+                //do something
+                console.log(result);
+            },
+            error: function (req, status, error) {
+                //error
+                console.log(result);
+                console.log(status);
+                console.log(error);
+
+            }
+        });
+    }
+    console.log(roomId);
+    console.log(reservationDay);
+
+}
 
 }

@@ -14,4 +14,5 @@ namespace CRMPortal.SharedServices.DomainModels
         public Guid RelatedRoom { get; set; }
         
     }
+
 }

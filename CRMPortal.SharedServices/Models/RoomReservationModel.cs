@@ -29,17 +29,8 @@ namespace CRMPortal.SharedServices.Models
         internal bool CheckReservationAvilability(new_roomreservationrequest request)
         {
             bool dateValid = true;
-            List<new_roomoccupation> occupations;
-            using (crmcontgenerated OrgContext = new crmcontgenerated(OrgService))
-            {
-                occupations =
-                   (
-                   from oc in OrgContext.new_roomoccupationSet
-                   where oc.new_relatedRoom == request.new_Room
-                   select oc).ToList();
-            }
-            
-            occupations = occupations.Where(oo => oo.new_OccupiedTo.Value.Date == request.new_DateTo.Value.Date).ToList();
+            List<new_roomoccupation> occupations = GetRoomOccupations(request);
+
             foreach (var o in occupations)
             {
                 if (// reservation from  is not within testing occupation 
@@ -60,6 +51,23 @@ namespace CRMPortal.SharedServices.Models
             //IOrganizationService  serv =Auth.GetOrgService();
 
             return dateValid; 
+        }
+
+        public List<new_roomoccupation> GetRoomOccupations(new_roomreservationrequest request)
+        {
+            List<new_roomoccupation> occupations;
+            using (crmcontgenerated OrgContext = new crmcontgenerated(OrgService))
+            {
+                occupations =
+                   (
+                   from oc in OrgContext.new_roomoccupationSet
+                   where oc.new_relatedRoom == request.new_Room
+                   select oc).ToList();
+            }
+
+            occupations = occupations.Where(oo => oo.new_Occupiedfrom.Value.Date == request.new_DateFrom.Value.Date).ToList();
+            return occupations;
+            new_roomoccupation oi = new new_roomoccupation();
         }
     }
 }
