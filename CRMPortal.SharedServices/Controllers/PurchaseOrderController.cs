@@ -39,20 +39,20 @@ namespace CRMPortal.SharedServices.Controllers
                     //bool x = r.Attributes.Keys.Contains("new_name");
                     viewRequests.Add(new PurchaseOrderRequest
                     {
-<<<<<<< HEAD
+
                         CreatedAt = r.Attributes.Keys.Contains("createdon") ? DateTime.Parse(r["createdon"].ToString()) : new DateTime(),
                         RequestTitle = r.Attributes.Keys.Contains("new_name") ? r["new_name"].ToString() : "",
                         RequestNumber = r.Attributes.Keys.Contains("new_requestnumber") ? r["new_requestnumber"].ToString() : "",
                         NumberOfitems = r.Attributes.Keys.Contains("new_numberofitems") ? r["new_numberofitems"].ToString() : "",
                         Purpose = r.Attributes.Keys.Contains("new_purpose") ? r["new_purpose"].ToString() : "",
-                        StatusReason = r.Attributes.Keys.Contains("statuscode") ? r.FormattedValues["statuscode"].ToString() : ""
-=======
-                        CreatedAt = DateTime.Parse(r["createdon"].ToString()),
-                        RequestTitle = r["new_name"].ToString(),
-                        RequestNumber =(r.Contains("new_requestnumber"))? r["new_requestnumber"].ToString():string.Empty,
-                        NumberOfitems = r["new_numberofitems"].ToString(),
-                        StatusReason = r.FormattedValues["statuscode"].ToString()
->>>>>>> 898e6793cda1d4fcc87347dd0e273137f68d4ff0
+                        StatusReason = r.Attributes.Keys.Contains("statuscode") ? r.FormattedValues["statuscode"].ToString() : ""//,
+
+                        //CreatedAt = DateTime.Parse(r["createdon"].ToString()),
+                        //RequestTitle = r["new_name"].ToString(),
+                        //RequestNumber =(r.Contains("new_requestnumber"))? r["new_requestnumber"].ToString():string.Empty,
+                        //NumberOfitems = r["new_numberofitems"].ToString(),
+                        //StatusReason = r.FormattedValues["statuscode"].ToString()
+
                     });
                 }
                 catch (KeyNotFoundException)
