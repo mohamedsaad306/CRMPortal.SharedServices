@@ -12,6 +12,7 @@ namespace CRMPortal.SharedServices.Models
     {
 
         private readonly OrganizationServiceContext _context;
+        public  IOrganizationService OrganizaionService { get; set; }
 
 
         public UnitOfWork(OrganizationServiceContext ctx, IOrganizationService orgService)
@@ -34,6 +35,5 @@ namespace CRMPortal.SharedServices.Models
         public RoomReservationModel RoomReservationModel { get { return new RoomReservationModel(_context, OrganizaionService); } }
         public RoomModel Rooms { get { return new RoomModel(_context, OrganizaionService); } }
 
-        public  IOrganizationService OrganizaionService { get; set; }
     }
 }

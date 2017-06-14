@@ -39,27 +39,15 @@ namespace CRMPortal.SharedServices.Controllers
                     //bool x = r.Attributes.Keys.Contains("new_name");
                     viewRequests.Add(new PurchaseOrderRequest
                     {
-<<<<<<< HEAD
-
-=======
->>>>>>> 39c6c49a8871815842e6004f007af12a68703278
+ 
                         CreatedAt = r.Attributes.Keys.Contains("createdon") ? DateTime.Parse(r["createdon"].ToString()) : new DateTime(),
                         RequestTitle = r.Attributes.Keys.Contains("new_name") ? r["new_name"].ToString() : "",
                         RequestNumber = r.Attributes.Keys.Contains("new_requestnumber") ? r["new_requestnumber"].ToString() : "",
                         NumberOfitems = r.Attributes.Keys.Contains("new_numberofitems") ? r["new_numberofitems"].ToString() : "",
                         Purpose = r.Attributes.Keys.Contains("new_purpose") ? r["new_purpose"].ToString() : "",
-<<<<<<< HEAD
+ 
                         StatusReason = r.Attributes.Keys.Contains("statuscode") ? r.FormattedValues["statuscode"].ToString() : ""//,
 
-                        //CreatedAt = DateTime.Parse(r["createdon"].ToString()),
-                        //RequestTitle = r["new_name"].ToString(),
-                        //RequestNumber =(r.Contains("new_requestnumber"))? r["new_requestnumber"].ToString():string.Empty,
-                        //NumberOfitems = r["new_numberofitems"].ToString(),
-                        //StatusReason = r.FormattedValues["statuscode"].ToString()
-
-=======
-                        StatusReason = r.Attributes.Keys.Contains("statuscode") ? r.FormattedValues["statuscode"].ToString() : "",
->>>>>>> 39c6c49a8871815842e6004f007af12a68703278
                     });
                 }
                 catch (KeyNotFoundException)

@@ -67,7 +67,6 @@ namespace CRMPortal.SharedServices.Models
 
             occupations = occupations.Where(oo => oo.new_Occupiedfrom.Value.Date == request.new_DateFrom.Value.Date).ToList();
             return occupations;
-            new_roomoccupation oi = new new_roomoccupation();
-        }
+         }
     }
 }

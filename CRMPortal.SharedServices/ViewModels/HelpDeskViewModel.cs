@@ -11,6 +11,7 @@ namespace CRMPortal.SharedServices.ViewModels
     public class HelpDeskIndexViewModel
     {
         public List<HelpDeskRequest> Requests { get; set; }
+        
     }
     public class HelpDeskFormViewModel
     {
