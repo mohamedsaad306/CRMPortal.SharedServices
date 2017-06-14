@@ -3,6 +3,21 @@
 @{
     ViewBag.Title = "Index";
 }
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.8.1/bootstrap-table.min.css">
+
+<style>
+    td {
+        border: 1px #DDD solid;
+        padding: 5px;
+        cursor: pointer;
+    }
+
+    .selected {
+        background-color: brown;
+        color: #FFF;
+    }
+</style>
 
 <div class="container">
 
@@ -20,29 +35,77 @@
                 </div>
                 <div style="margin-top: 10px"></div>
 
-                <table class="table table-hover table-striped" id="table">
-                    <tr>
-                        <th>Title</th>
-                        <th>Request Number </th>
-                        <th>#Items</th>
-                        <th>Status</th>
-                        <th> </th>
-                    </tr>
-                    @{
-                        foreach (var r in Model.Requests)
-                        {
-                            <tr>
-                                <td>@r.RequestTitle</td>
-                                <td>@r.RequestNumber</td>
-                                <td>@r.NumberOfitems</td>
-                                <td>@r.StatusReason</td>
-                                <td>
-                                    <input type="button" data-id="@r.RequestNumber" value="@r.GetButtonValue" class="btn btn-@r.GetButtonClass" />
-                                </td>
-                            </tr>
+                @*<table class="table table-hover table-striped" id="table">
+                        <tr>
+                            <th>Title</th>
+                            <th>Request Number </th>
+                            <th>#Items</th>
+                            <th>Status</th>
+                            <th> </th>
+                        </tr>
+                        @{
+                            foreach (var r in Model.Requests)
+                            {
+                                <tr>
+                                    <td>@r.RequestTitle</td>
+                                    <td>@r.RequestNumber</td>
+                                    <td>@r.NumberOfitems</td>
+                                    <td>@r.StatusReason</td>
+                                    <td>
+                                        <input type="button" data-id="@r.RequestNumber" value="@r.GetButtonValue" class="btn btn-@r.GetButtonClass" />
+                                    </td>
+                                </tr>
+                            }
                         }
-                    }
+                    </table>*@
+
+
+
+                <table id="eventsTable"
+                       data-toggle="table"
+                       @*data-height="800"*@
+                       @*data-url="https://api.github.com/users/wenzhixin/repos?type=owner&sort=full_name&direction=asc&per_page=100&page=1"*@
+                       data-pagination="true"
+                       data-search="true"
+                       data-show-refresh="true"
+                       data-show-toggle="true"
+                       data-show-columns="true"
+                       data-toolbar="#toolbar">
+                    <thead>
+                        <tr>
+                            @*<th data-field="state" data-checkbox="true"></th>*@
+                            <th data-field="title">Title</th>
+                            <th data-field="request_number">Request Number</th>
+                            <th data-field="items">#Items</th>
+                            <th data-field="status">Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            for (int i = 0; i < 20; i++)
+                            {
+                                foreach (var r in Model.Requests)
+                                {
+                                    <tr>
+                                        <td>@r.RequestTitle</td>
+                                        <td>@r.RequestNumber</td>
+                                        <td>@r.NumberOfitems</td>
+                                        <td>@r.StatusReason</td>
+                                        <td>
+                                            <input type="button" data-id="@r.RequestNumber" value="@r.GetButtonValue" class="btn btn-@r.GetButtonClass" />
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        }
+                    </tbody>
                 </table>
+
+                
+
+
+
 
             </div>
         </div>
@@ -50,10 +113,37 @@
 </div>
 
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.8.1/bootstrap-table.min.js"></script>
+
 <script>
     (function () {
-       
-        $("#table").on("click", "input", function (data) { console.log(data.target) })
+
+        //$("#table").click(function (data) { console.log(data.target) })
         //console.log(document.getElementById('btn').getAttribute('data-id'));
+        //var checkedRows = [];
+
+        //$('#eventsTable').on('check.bs.table', function (e, row) {
+        //    checkedRows.push({ id: row.id, name: row.name, forks: row.forks });
+        //    console.log(checkedRows);
+        //});
+
+        //$('#eventsTable').on('uncheck.bs.table', function (e, row) {
+        //    $.each(checkedRows, function (index, value) {
+        //        if (value.id === row.id) {
+        //            checkedRows.splice(index, 1);
+        //        }
+        //    });
+        //    console.log(checkedRows);
+        //});
+
+        //$("#add_cart").click(function () {
+        //    $("#output").empty();
+        //    $.each(checkedRows, function (index, value) {
+        //        $('#output').append($('<li></li>').text(value.id + " | " + value.name + " | " + value.forks));
+        //    });
+        //});
+
     })();
 </script>
