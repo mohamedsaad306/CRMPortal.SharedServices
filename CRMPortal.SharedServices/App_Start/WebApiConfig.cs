@@ -17,7 +17,7 @@ namespace CRMPortal.SharedServices
 
             config.Routes.MapHttpRoute(
                name: "Api as RPC",
-               routeTemplate: "api/{controller}/{action}",
+               routeTemplate: "api/rpc/{controller}/{action}",
                defaults: new { }
            );
 

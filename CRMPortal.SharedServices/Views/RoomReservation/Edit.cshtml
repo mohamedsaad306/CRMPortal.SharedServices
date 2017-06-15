@@ -39,7 +39,7 @@
             <span class="input-group-addon">
                 <span class="glyphicon glyphicon-time"></span>
             </span>
-            @Html.TextBoxFor(model => model.DateFrom, new { @class = "form-control datepicker " })
+            @Html.TextBoxFor(model => model.DateFrom, new { @class = "form-control datepicker ",id = "date-from" })
         </div>
     </div>
 
@@ -104,20 +104,27 @@
     console.log(reservationDay);
     }*@
 
-    function CheckAvailability() {
+  function CheckAvailability() {
     var roomId = $("#selected-room").val();
-    var reservationDay = $("#reservation-day").val()+" "+$("#date-to").val();
-    if (roomId != "" && reservationDay != "") {
+    var reservationDay = $("#reservation-day").val();
+    var dateFrom = $("#date-from").val();
+    var dateTo = $("#date-to").val();
 
+    var reservationModel= {
+        "Day":reservationDay,
+        "DateFrom":dateFrom,
+        "DateTo":dateTo,
+        "RoomToReserve":roomId
+    }
+
+    if (roomId != "" && reservationDay != "") {
+        console.log(reservationModel);
         $.ajax({
             type: "POST",
-            url: "/api/roomreservations/CheckRoomAvailability/",
+            url: "/api/rpc/roomreservations/CheckRoomAvailability/",
             contentType: "application/json; charset=utf-8",
-            data: ({
-                _reservationDay: reservationDay,
-                _roomId: roomId
-            }),
-
+            data:JSON.stringify({occ:reservationModel}),
+               dataType:"json",
             success: function (result) {
                 //do something
                 console.log(result);

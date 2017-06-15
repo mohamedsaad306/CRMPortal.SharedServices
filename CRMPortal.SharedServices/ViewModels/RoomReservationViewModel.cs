@@ -31,3 +31,8 @@ namespace CRMPortal.SharedServices.ViewModels
         public List<Models.Room> AvailableRooms { get; set; }
     }
 }
+class OccupationDTO
+{
+    public DateTime DaytoReserve { get; set; }
+    public Guid roomToreserve { get; set; }
+}
