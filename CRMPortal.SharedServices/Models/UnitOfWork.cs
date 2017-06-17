@@ -35,5 +35,8 @@ namespace CRMPortal.SharedServices.Models
         public RoomReservationModel RoomReservationModel { get { return new RoomReservationModel(_context, OrganizaionService); } }
         public RoomModel Rooms { get { return new RoomModel(_context, OrganizaionService); } }
 
+        public TransportationModel Transportations { get { return new TransportationModel(_context, OrganizaionService); } }
+        public CustomerModel Customers { get { return new CustomerModel(_context, OrganizaionService); } }
+        
     }
 }

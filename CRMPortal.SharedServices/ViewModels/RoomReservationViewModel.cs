@@ -24,11 +24,12 @@ namespace CRMPortal.SharedServices.ViewModels
         public DateTime DateTo { get; set; }
 
         [Display(Name = "Title")]
+        [Required]
         public string RequestTitle { get; set; }
 
         [Display(Name = "Room Number ")]        
         public Guid RoomToReserve { get; set; }
-        public List<Models.Room> AvailableRooms { get; set; }
+        public List<Room> AvailableRooms { get; set; }
     }
 }
 class OccupationDTO

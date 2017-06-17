@@ -50,7 +50,8 @@ namespace CRMPortal.SharedServices.Controllers
 
             AccountViewModel vm = new AccountViewModel { Acc = uof.AccModel };
             uof.Dispose();
-            return View("Home", vm);
+            return RedirectToAction("Home", vm);
+            //return View("Home", vm);
         }
 
 
@@ -71,6 +72,14 @@ namespace CRMPortal.SharedServices.Controllers
                 return View("Contacts", vm);
             }
             return RedirectToAction("Login", "Account");
+        }
+
+        public ActionResult Home(AccountViewModel model )
+        {
+            if (Session["LoggedInUserId"] == null)
+                return RedirectToAction("Login", "Account");
+
+            return View(model);
         }
 
     }

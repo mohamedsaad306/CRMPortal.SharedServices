@@ -19,7 +19,7 @@
     <div class="form-group">
         @Html.LabelFor(e => e.RoomToReserve)
         @Html.DropDownListFor(e => e.RoomToReserve, new SelectList(Model.AvailableRooms, "Id", "Name"), "Select Room", new { @class = "form-control", id = "selected-room" })
-        <lable id="check-button" class="btn btn-primary">Check Room reservations</lable>
+        <label id="check-button" class="btn btn-primary">Check Room reservations</label>
     </div>
 
     <div class="form-group ">
@@ -76,7 +76,6 @@
 
     $('#timeTo').datetimepicker({
     format:'LT',
-
     });
 
     @*function CheckAvailability() {
@@ -123,7 +122,7 @@
             type: "POST",
             url: "/api/rpc/roomreservations/CheckRoomAvailability/",
             contentType: "application/json; charset=utf-8",
-            data:JSON.stringify({occ:reservationModel}),
+            data:reservationModel,
                dataType:"json",
             success: function (result) {
                 //do something

@@ -144,13 +144,18 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PurchaseOrderController.cs" />
     <Compile Include="Controllers\RoomReservationController.cs" />
+    <Compile Include="Controllers\TransportationController.cs" />
     <Compile Include="DomainModels\crmClass_6-6.cs" />
+    <Compile Include="DomainModels\Customer.cs" />
     <Compile Include="DomainModels\PurchaseOrderRequest.cs" />
     <Compile Include="DomainModels\Request.cs" />
     <Compile Include="DomainModels\RoomReservationRequest.cs" />
+    <Compile Include="DomainModels\Transportation.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\DrownDownListHelper.cs" />
+    <Compile Include="Helpers\HtmlSelectListModel.cs" />
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\AuthenticationCredintial.cs" />
     <Compile Include="Models\ContactModel.cs" />
@@ -158,9 +163,11 @@
     <Compile Include="Models\HelpDeskModel.cs" />
     <Compile Include="Models\PurchaseOrderModel.cs" />
     <Compile Include="Models\Repository.cs" />
-    <Compile Include="Models\Room.cs" />
+    <Compile Include="DomainModels\Room.cs" />
+    <Compile Include="Models\CustomerModel.cs" />
     <Compile Include="Models\RoomModel.cs" />
     <Compile Include="Models\RoomReservationModel.cs" />
+    <Compile Include="Models\TransportationModel.cs" />
     <Compile Include="Models\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AccountViewModel.cs" />
@@ -168,6 +175,7 @@
     <Compile Include="ViewModels\HelpDeskViewModel.cs" />
     <Compile Include="ViewModels\PurchaseOrderViewModel.cs" />
     <Compile Include="ViewModels\RoomReservationViewModel.cs" />
+    <Compile Include="ViewModels\TransportationViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-datetimepicker.css" />
@@ -298,6 +306,7 @@
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\MyScripts\TransportationRequest.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
@@ -327,6 +336,8 @@
     <Content Include="Views\RoomReservation\Edit.cshtml" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
+    <Content Include="Views\Transportation\Index.cshtml" />
+    <Content Include="Views\Transportation\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

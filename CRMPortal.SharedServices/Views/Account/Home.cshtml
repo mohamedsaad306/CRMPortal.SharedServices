@@ -6,7 +6,7 @@
 
 <h3>
     <label class="">Welcome </label>
-    @Html.DisplayFor(e => e.Acc.UserLastName, new { @class = "lable label-info" })
+    @*@Html.DisplayFor(e => e.Acc.UserLastName, new { @class = "lable label-info" })*@
 </h3>
 <br />
 <h3>
@@ -17,4 +17,6 @@
 @Html.ActionLink("Purchase Order", "Index", "PurchaseOrder", new { }, new { @class = "btn btn-primary" })
  
 @Html.ActionLink("Room Reservation ", "Index", "RoomReservation", new { }, new { @class = "btn btn-primary" })
+
+@Html.ActionLink("Transportaion Request", "Index", "Transportation", new { }, new { @class = "btn btn-primary" })
 </h3>
