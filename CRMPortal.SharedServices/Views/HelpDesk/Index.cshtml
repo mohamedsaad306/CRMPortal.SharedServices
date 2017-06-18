@@ -3,28 +3,55 @@
     ViewBag.Title = "Index";
 }
 
-@Html.ActionLink("New Reqest", "Edit", "HelpDesk", null, new { @class = "label label-success" }) 
-<br />
-<table class="table table-hover table-striped">
-    <tr>
-        <th>Title</th>
-        <th>Request Number </th>
-        <th>Details</th>
-        <th>Status</th>
-    </tr>
-    @{
-        foreach (var r in Model.Requests)
-        {
-           <tr>
-               <td>@r.RequestTitle</td>
-               <td>@r.RequestNumber</td>
-               <td>@r.RequestDetails</td>
-               <td>@r.StatusReason</td>
-           </tr>
-        }
-    }
-</table>
 
+<div class="container">
 
+    <div class="clearfix"></div>
 
+    <fieldset>
+        <legend class="legend">Help Desk</legend>
 
+        <div class="panel">
+
+            <div class="panel-body">
+
+                <div>
+                    @Html.ActionLink("Create Help Desk Request", "Edit", "HelpDesk", null, new { @class = "new" })
+                </div>
+                <div style="margin-top: 10px"></div>
+
+                <table data-toggle="table"
+                       data-pagination="true"
+                       data-search="true"
+                       data-show-refresh="true"
+                       data-show-toggle="true"
+                       data-show-columns="true"
+                       data-toolbar="#toolbar"
+                       class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Request Number </th>
+                            <th>Details</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (var r in Model.Requests)
+                            {
+                                <tr>
+                                    <td>@r.RequestTitle</td>
+                                    <td>@r.RequestNumber</td>
+                                    <td>@r.RequestDetails</td>
+                                    <td>@r.StatusReason</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </fieldset>
+</div>

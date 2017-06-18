@@ -3,30 +3,59 @@
     ViewBag.Title = "Index";
 }
 
-<h2>RoomReservation</h2>
 
-@Html.ActionLink("New Reqest", "Edit", "RoomReservation", null, new { @class = "label label-success" })
-<br />
-<table class="table table-hover table-striped">
-    <tr>
-        <th>Title</th>
-        <th>Day </th>
-        <th>From </th>
-        <th>To </th>
-        <th>Status</th>
-    </tr>
-    @{
-        foreach (var r in Model.requests)
-        {
-            <tr>
-                <td>@r.RequestTitle</td>
-                <td>@r.DateFrom.ToShortDateString()</td>
-                <td>@r.DateFrom.TimeOfDay</td>
-                <td>@r.DateTo.TimeOfDay</td>
-                <td>@r.StatusReason</td>
-            </tr>
-        }
-    }
-</table>
+<div class="container">
 
-`
+    <div class="clearfix"></div>
+
+    <fieldset>
+        <legend class="legend">Room Reservation</legend>
+
+        <div class="panel">
+
+            <div class="panel-body">
+
+                <div>
+                    @Html.ActionLink("Create Room Reservation", "Edit", "RoomReservation", null, new { @class = "new" })
+                </div>
+                <div style="margin-top: 10px"></div>
+
+                <table id="eventsTable"
+                       class="table table-hover table-striped"
+                       data-toggle="table"
+                       data-pagination="true"
+                       data-search="true"
+                       data-show-refresh="true"
+                       data-show-toggle="true"
+                       data-show-columns="true"
+                       data-toolbar="#toolbar">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Day </th>
+                            <th>From </th>
+                            <th>To </th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (var r in Model.requests)
+                            {
+                                <tr>
+                                    <td>@r.RequestTitle</td>
+                                    <td>@r.DateFrom.ToShortDateString()</td>
+                                    <td>@r.DateFrom.TimeOfDay</td>
+                                    <td>@r.DateTo.TimeOfDay</td>
+                                    <td>@r.StatusReason</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </fieldset>
+</div>
+

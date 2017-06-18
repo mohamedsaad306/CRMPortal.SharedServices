@@ -43,6 +43,11 @@ namespace CRMPortal.SharedServices.Controllers
         {
             if (id != null)
             {
+                if (Session["LoggedInUserId"] == null)
+                {
+                    TempData["info"] = "Please Login to Access this Page.. ";
+                    return RedirectToAction("Login", "Account");
+                }
                 uof = Auth.GetContext(Session["LoggedInUser"].ToString(), Session["LoggedInPassword"].ToString());
                 PurchaseOrderRequest po = uof.PurchaseOrderModel.GetPurchaseRequestById(new Guid(Session["LoggedInUserId"].ToString()), (Guid)id);
                 PurchaseOrderFormViewModel r;
@@ -58,14 +63,18 @@ namespace CRMPortal.SharedServices.Controllers
                         Status = po.Status,
                         StatusReason = po.StatusReason
                     };
-
+                    TempData["PK"] = id;
+                    TempData["Flag"] = true;
                 }
                 else
                 {
                     r = null;
                 }
 
-                ViewBag.IsReadOnly = po.RequestNumber == "" ? "" : "readonly";
+                if (po.RequestNumber != "")
+                {
+                    ViewBag.IsReadOnly = "readonly";
+                }
                 return View(r);
             }
             else
@@ -75,11 +84,11 @@ namespace CRMPortal.SharedServices.Controllers
         }
 
         //[HttpPost]
-        public ActionResult Save(PurchaseOrderFormViewModel _r, string saveOrDraft, string isReadOnly)
+        public ActionResult Save(PurchaseOrderFormViewModel _r, string saveOrDraft)
         {
-            return SaveOrDraft(_r, isReadOnly);
+            return SaveOrDraft(_r, saveOrDraft);
         }
-        ActionResult SaveOrDraft(PurchaseOrderFormViewModel _r, string isReadOnly = null)
+        ActionResult SaveOrDraft(PurchaseOrderFormViewModel _r, string saveOrDraft)
         {
             try
             {
@@ -91,14 +100,14 @@ namespace CRMPortal.SharedServices.Controllers
 
                 uof = Auth.GetContext(Session["LoggedInUser"].ToString(), Session["LoggedInPassword"].ToString());
 
-                if (isReadOnly == null)
+                if (TempData["Flag"] == null || !(bool)TempData["Flag"])
                 {
                     Entity req = new Entity("new_purchaserequest");
                     req["new_name"] = _r.RequestTitle;
                     req["new_numberofitems"] = int.Parse(_r.NumberOfitems);
                     req["new_itemname"] = _r.ItemName;
                     req["new_purpose"] = _r.Purpose;
-                    req["new_actions"] = new OptionSetValue(_r.SaveOrDraft == "Submit Request" ? 100000001 : 100000000);
+                    req["new_actions"] = new OptionSetValue(saveOrDraft == "Submit Request" ? 100000001 : 100000000);
                     //req["new_purchaserequestid"] = _r.PK;
                     Guid uid = new Guid(Session["LoggedInUserId"].ToString());
                     req["new_relatedemployeeid"] = new EntityReference("systemuser", uid);
@@ -107,16 +116,17 @@ namespace CRMPortal.SharedServices.Controllers
                 }
                 else
                 {
-                    new_purchaserequest e = uof.PurchaseOrderModel.Context.CreateQuery<new_purchaserequest>().Where(r => r.Id == _r.PK).FirstOrDefault();
+                    new_purchaserequest e = uof.PurchaseOrderModel.Context.CreateQuery<new_purchaserequest>().Where(r => r.Id == (Guid)TempData["PK"]).FirstOrDefault();
                     e.new_name = _r.RequestTitle;
                     e.new_Numberofitems = int.Parse(_r.NumberOfitems);
                     e.new_ItemName = _r.ItemName;
                     e.new_Purpose = _r.Purpose;
-                    e.new_Actions = new OptionSetValue(_r.SaveOrDraft == "Submit Request" ? 100000001 : 100000000);
+                    e.new_Actions = new OptionSetValue(saveOrDraft == "Submit Request" ? 100000001 : 100000000);
                     Guid uid = new Guid(Session["LoggedInUserId"].ToString());
                     e["new_relatedemployeeid"] = new EntityReference("systemuser", uid);
 
                     uof.PurchaseOrderModel.EditRequest(e);
+                    ViewBag.Flag = false;
                 }
 
                 TempData["info"] = _r.SaveOrDraft;

@@ -5,41 +5,75 @@
 }
 
 <h3>
-    <label class="">Welcome </label>
+    @*<label class="">Welcome </label>*@
     @*@Html.DisplayFor(e => e.Acc.UserLastName, new { @class = "lable label-info" })*@
 </h3>
-<br />
+@*<br />*@
 @*<h3>*@
-    @*@Html.ActionLink("Display Contacts", "GetContacts", "Account", new { }, new { @class = "btn btn-primary" })*@
+@*@Html.ActionLink("Display Contacts", "GetContacts", "Account", new { }, new { @class = "btn btn-primary" })*@
 
-    @*@Html.ActionLink("Help Desk Request", "Index", "HelpDesk", new { }, new { @class = "btn btn-primary" })
+@*@Html.ActionLink("Help Desk Request", "Index", "HelpDesk", new { }, new { @class = "btn btn-primary" })
 
-        @Html.ActionLink("Purchase Order", "Index", "PurchaseOrder", new { }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Purchase Order", "Index", "PurchaseOrder", new { }, new { @class = "btn btn-primary" })
 
-        @Html.ActionLink("Room Reservation ", "Index", "RoomReservation", new { }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Room Reservation ", "Index", "RoomReservation", new { }, new { @class = "btn btn-primary" })
 
-        @Html.ActionLink("Transportaion Request", "Index", "Transportation", new { }, new { @class = "btn btn-primary" })
-        </h3>*@
-    <table class="table table-hover table-striped">
-        <tr>
-            <th>Title</th>
-            <th>Request Number</th>
-            <th>Date</th>
-            <th>Dtatus</th>
-            <th>Action</th>
-        </tr>
-        @{
-            foreach (var r in Model.Requests)
-            {
-                <tr>
-                    <td>@r.RequestTitle</td>
-                    <td>@r.RequestNumber</td>
-                    <td>@r.CreatedAt</td>
-                    <td>@r.StatusReason</td>
-                    @*<td><label class="btn btn-primary" >Action</label></td>*@
-                    <td>@r.RequestType</td>
-                </tr>
-            }
-        }
-    </table>
-    `
+    @Html.ActionLink("Transportaion Request", "Index", "Transportation", new { }, new { @class = "btn btn-primary" })
+    </h3>*@
+
+
+<div class="container">
+
+    <div class="clearfix"></div>
+
+    <fieldset>
+        <legend class="legend">Welcome</legend>
+
+        <div class="panel">
+
+            <div class="panel-body">
+
+                <div>
+                    @*  I have an objection here !!! *@
+                    @*@Html.ActionLink("New Reqest", "Edit", "Transportation", null, new { @class = "new" })*@
+                </div>
+                <div style="margin-top: 10px"></div>
+
+                <table data-toggle="table"
+                       data-pagination="true"
+                       data-search="true"
+                       data-show-refresh="true"
+                       data-show-toggle="true"
+                       data-show-columns="true"
+                       data-toolbar="#toolbar"
+                       class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Request Number</th>
+                            <th>Date</th>
+                            <th>Dtatus</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (var r in Model.Requests)
+                            {
+                                <tr>
+                                    <td>@r.RequestTitle</td>
+                                    <td>@r.RequestNumber</td>
+                                    <td>@r.CreatedAt</td>
+                                    <td>@r.StatusReason</td>
+                                    @*<td><label class="btn btn-primary" >Action</label></td>*@
+                                    <td>@r.RequestType</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </fieldset>
+</div>
