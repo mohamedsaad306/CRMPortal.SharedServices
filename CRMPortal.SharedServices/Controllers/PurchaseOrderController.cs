@@ -39,13 +39,13 @@ namespace CRMPortal.SharedServices.Controllers
                     //bool x = r.Attributes.Keys.Contains("new_name");
                     viewRequests.Add(new PurchaseOrderRequest
                     {
+                        PK = r.Id,
                         CreatedAt = r.Attributes.Keys.Contains("createdon") ? DateTime.Parse(r["createdon"].ToString()) : new DateTime(),
                         RequestTitle = r.Attributes.Keys.Contains("new_name") ? r["new_name"].ToString() : "",
                         RequestNumber = r.Attributes.Keys.Contains("new_requestnumber") ? r["new_requestnumber"].ToString() : "",
                         NumberOfitems = r.Attributes.Keys.Contains("new_numberofitems") ? r["new_numberofitems"].ToString() : "",
                         Purpose = r.Attributes.Keys.Contains("new_purpose") ? r["new_purpose"].ToString() : "",
-                        StatusReason = r.Attributes.Keys.Contains("statuscode") ? r.FormattedValues["statuscode"].ToString() : ""//,
-
+                        StatusReason = r.Attributes.Keys.Contains("statuscode") ? r.FormattedValues["statuscode"].ToString() : ""
                         //CreatedAt = DateTime.Parse(r["createdon"].ToString()),
                         //RequestTitle = r["new_name"].ToString(),
                         //RequestNumber =(r.Contains("new_requestnumber"))? r["new_requestnumber"].ToString():string.Empty,
@@ -69,6 +69,7 @@ namespace CRMPortal.SharedServices.Controllers
 
         public ActionResult Edit(Guid? id)
         {
+            TempData["Info"] = id;
             return View();
         }
 
@@ -95,7 +96,7 @@ namespace CRMPortal.SharedServices.Controllers
                 req["new_itemname"] = _r.ItemName;
                 req["new_purpose"] = _r.Purpose;
                 req["new_actions"] = new OptionSetValue(actionNumber);
-
+                req["new_purchaserequestid"] = _r.PK;
                 Guid uid = new Guid(Session["LoggedInUserId"].ToString());
                 req["new_relatedemployeeid"] = new EntityReference("systemuser", uid);
 

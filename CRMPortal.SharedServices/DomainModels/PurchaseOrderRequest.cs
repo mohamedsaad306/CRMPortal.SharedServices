@@ -14,6 +14,7 @@ namespace CRMPortal.SharedServices.Models.DomainModels
         public string StatusReason { get; set; }
         public string RequestNumber { get; set; }
         public string Purpose { get; set; }
+        public Guid PK { get; set; }
         public string GetButtonValue
         {
             get

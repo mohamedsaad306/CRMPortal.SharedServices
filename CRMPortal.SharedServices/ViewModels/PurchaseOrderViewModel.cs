@@ -30,6 +30,8 @@ namespace CRMPortal.SharedServices.ViewModels
         public string StatusReason { get; set; }
         [Display(Name = "Purpose")]
         public string Purpose { get; set; }
+        [Display(Name = "PK")]
+        public Guid PK { get; set; }
 
     }
 
