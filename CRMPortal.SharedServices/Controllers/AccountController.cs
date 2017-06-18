@@ -1,5 +1,7 @@
 ﻿using CRMPortal.SharedServices.AuthenticationLayer;
+using CRMPortal.SharedServices.DomainModels;
 using CRMPortal.SharedServices.Models;
+using CRMPortal.SharedServices.Models.DomainModels;
 using CRMPortal.SharedServices.ViewModels;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Client;
@@ -14,7 +16,7 @@ namespace CRMPortal.SharedServices.Controllers
 {
     public class AccountController : Controller
     {
-
+        UnitOfWork uof;
 
         //
         // GET: /AccountModel/
@@ -50,7 +52,8 @@ namespace CRMPortal.SharedServices.Controllers
 
             AccountViewModel vm = new AccountViewModel { Acc = uof.AccModel };
             uof.Dispose();
-            return View("Home", vm);
+            return RedirectToAction("Home", vm);
+            //return View("Home", vm);
         }
 
 
@@ -60,7 +63,7 @@ namespace CRMPortal.SharedServices.Controllers
                 return RedirectToAction("Login", "Account");
 
             //Guid loggedInuserID = new Guid(Session["LoggedInUser"].ToString());
-            UnitOfWork uof = Auth.GetContext(Session["LoggedInUser"].ToString(), Session["LoggedInPassword"].ToString());
+            uof = Auth.GetContext(Session["LoggedInUser"].ToString(), Session["LoggedInPassword"].ToString());
             if (uof.AccModel.UserId != null)
             {
                 EntityReference ContactsOwner = new EntityReference("systemuser", (Guid)uof.AccModel.UserId);
@@ -71,6 +74,32 @@ namespace CRMPortal.SharedServices.Controllers
                 return View("Contacts", vm);
             }
             return RedirectToAction("Login", "Account");
+        }
+
+        public ActionResult Home(AccountViewModel model )
+        {
+            if (Session["LoggedInUserId"] == null)
+                return RedirectToAction("Login", "Account");
+            
+            uof = Auth.GetContext(Session["LoggedInUser"].ToString(), Session["LoggedInPassword"].ToString());
+            Guid usrId= new Guid(Session["LoggedInUserId"].ToString());
+            List<Request> currentRequests = new List<Request>();
+
+            List<HelpDeskRequest> helpDeskRequests = uof.HelpDeskModel.GetAllAsHelpDeskRequests(usrId);
+            List<PurchaseOrderRequest> purchasesRequests = uof.PurchaseOrderModel.GetAllAsPurchaseOrderRequest(usrId);
+            List<RoomReservationRequest> reservationRequests = uof.RoomReservationModel.GetAllAsReservationRequest(usrId);
+            List<Transportation> transportationReqests = uof.Transportations.GetAllAsTransportaion(usrId);
+
+
+
+            currentRequests.AddRange(helpDeskRequests);
+            currentRequests.AddRange(purchasesRequests);
+            currentRequests.AddRange(reservationRequests);
+            currentRequests.AddRange(transportationReqests);
+            
+            AccountHomeViewModel vm = new AccountHomeViewModel { Requests = currentRequests };
+            
+            return View(vm);
         }
 
     }

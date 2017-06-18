@@ -1,0 +1,32 @@
+﻿@model CRMPortal.SharedServices.ViewModels.TransportationIndexViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Transportation Requests</h2>
+
+@Html.ActionLink("New Reqest", "Edit", "Transportation", null, new { @class = "label label-success" })
+<br />
+<table class="table table-hover table-striped">
+    <tr>
+        <th>Title</th>
+        <th>Request Number</th>
+        <th>Date</th>
+        <th>Related Client  </th>
+        <th>Status</th>
+    </tr>
+    @{
+        foreach (var r in Model.requests)
+        {
+            <tr>
+                <td>@r.RequestTitle</td>
+                <td>@r.RequestNumber</td>
+                <td>@r.TransportationDate</td>
+                <td>@r.RelatedClient </td>
+                <td>@r.StatusReason</td>
+            </tr>
+        }
+    }
+</table>
+
+`

@@ -1,4 +1,4 @@
-﻿@model CRMPortal.SharedServices.ViewModels.AccountViewModel
+﻿@model CRMPortal.SharedServices.ViewModels.AccountHomeViewModel
 
 @{
     ViewBag.Title = "Home";
@@ -6,15 +6,40 @@
 
 <h3>
     <label class="">Welcome </label>
-    @Html.DisplayFor(e => e.Acc.UserLastName, new { @class = "lable label-info" })
+    @*@Html.DisplayFor(e => e.Acc.UserLastName, new { @class = "lable label-info" })*@
 </h3>
 <br />
-<h3>
-@*@Html.ActionLink("Display Contacts", "GetContacts", "Account", new { }, new { @class = "btn btn-primary" })*@
-    
-@Html.ActionLink("Help Desk Request", "Index", "HelpDesk", new { }, new { @class = "btn btn-primary" })
- 
-@Html.ActionLink("Purchase Order", "Index", "PurchaseOrder", new { }, new { @class = "btn btn-primary" })
- 
-@Html.ActionLink("Room Reservation ", "Index", "RoomReservation", new { }, new { @class = "btn btn-primary" })
-</h3>
+@*<h3>*@
+    @*@Html.ActionLink("Display Contacts", "GetContacts", "Account", new { }, new { @class = "btn btn-primary" })*@
+
+    @*@Html.ActionLink("Help Desk Request", "Index", "HelpDesk", new { }, new { @class = "btn btn-primary" })
+
+        @Html.ActionLink("Purchase Order", "Index", "PurchaseOrder", new { }, new { @class = "btn btn-primary" })
+
+        @Html.ActionLink("Room Reservation ", "Index", "RoomReservation", new { }, new { @class = "btn btn-primary" })
+
+        @Html.ActionLink("Transportaion Request", "Index", "Transportation", new { }, new { @class = "btn btn-primary" })
+        </h3>*@
+    <table class="table table-hover table-striped">
+        <tr>
+            <th>Title</th>
+            <th>Request Number</th>
+            <th>Date</th>
+            <th>Dtatus</th>
+            <th>Action</th>
+        </tr>
+        @{
+            foreach (var r in Model.Requests)
+            {
+                <tr>
+                    <td>@r.RequestTitle</td>
+                    <td>@r.RequestNumber</td>
+                    <td>@r.CreatedAt</td>
+                    <td>@r.StatusReason</td>
+                    @*<td><label class="btn btn-primary" >Action</label></td>*@
+                    <td>@r.RequestType</td>
+                </tr>
+            }
+        }
+    </table>
+    `

@@ -11,6 +11,7 @@ namespace CRMPortal.SharedServices.ViewModels
     public class HelpDeskIndexViewModel
     {
         public List<HelpDeskRequest> Requests { get; set; }
+        
     }
     public class HelpDeskFormViewModel
     {
@@ -19,7 +20,9 @@ namespace CRMPortal.SharedServices.ViewModels
         
         [Display(Name = "Details")]
         public string RequestDetails { get; set; }
-        
+
+        public bool isReadOnly { get; set; }
+
     }
 
 

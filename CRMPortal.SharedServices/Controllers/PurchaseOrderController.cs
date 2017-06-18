@@ -61,12 +61,17 @@ namespace CRMPortal.SharedServices.Controllers
                     continue;
                 }
             }
+=======
+            
+            List<PurchaseOrderRequest> viewRequests = uof.PurchaseOrderModel.GetAllAsPurchaseOrderRequest(new Guid(Session["LoggedInUserId"].ToString()));
+>>>>>>> cd227020990ff1dba16755aa538e2e26a41bf61a
 
             PurchaseOrderViewModel vm = new PurchaseOrderViewModel() { Requests = viewRequests };
             uof.Dispose();
             return View(vm);
         }
 
+    
         public ActionResult Edit(Guid? id)
         {
             TempData["Info"] = id;

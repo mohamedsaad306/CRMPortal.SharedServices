@@ -1,0 +1,96 @@
+﻿@model CRMPortal.SharedServices.ViewModels.TransportationFormViewModel
+@using CRMPortal.SharedServices.Helpers
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@section MyHead{
+    <script type="text/javascript" src="/scripts/jquery-3.1.1.js"></script>
+    <script type="text/javascript" src="/scripts/moment.min.js"></script>
+    <script type="text/javascript" src="/scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/scripts/bootstrap-datetimepicker.js"></script>
+    <link rel="stylesheet" href="/Content/bootstrap-datetimepicker.css" />
+
+}
+
+<h2>Edit</h2>
+
+@using (@Html.BeginForm("Save", "Transportation"))
+{
+    <div class="form-group">
+        @Html.LabelFor(r => r.title)
+        @Html.TextBoxFor(r => r.title, new { @class = "form-control " })
+    </div>
+
+    <div class="form-group" id="radio-customerType">
+        <label class="radio-inline">
+            @Html.RadioButtonFor(r => r.CustomerType, "contact", new { id = "radio-contact" })
+            @*<input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">*@Contact
+        </label>
+        <label class="radio-inline">
+            @Html.RadioButtonFor(r => r.CustomerType, "account", new { id = "radio-account" })
+            @*<input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">*@Account
+        </label>
+    </div>   
+
+    <div class="form-group">
+        @Html.LabelFor(e => e.Client)
+        @Html.DropDownListWithAttributesFor(
+        m => m.AvailableCustomers,
+          new HtmlSelectListModel<CRMPortal.SharedServices.DomainModels.Customer>
+          {
+              DataObjects = Model.AvailableCustomers,
+              EmptyValueText = "- Select a Customer -",
+              SelectAttributes = new Dictionary<string, string>
+              {
+              { "Id", "selected-customer" }, { "Name", "Client" }, { "class", "form-control" }
+              },
+              OptionAttributes = new Dictionary<string, string>
+                                    {
+                                        { "value", "Id" }, { "inner-text", "Name" }, { "data-logicalEntity", "LogicalName" }
+                                    }
+          })
+        @*@Html.DropDownListFor(e => e.Client, new SelectList(Model.AvailableCustomers, "Id", "Name"), "Select Customer", new { @class = "form-control", id = "selected-customer" })*@
+    </div>
+
+    <div class="form-group ">
+        @Html.LabelFor(r => r.Date)
+        <div class="input-group date" id="dayPicker">
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-time"></span>
+            </span>
+            @Html.TextBoxFor(model => model.Date, new { @class = "form-control datepicker ", placeholder = "Select Day ", id = "reservation-day" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(r => r.Address)
+        @Html.TextBoxFor(r => r.Address, new { @class = "form-control " })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(r => r.Details)
+        @Html.TextBoxFor(r => r.Details, new { @class = "form-control " })
+    </div>
+
+    <input type="submit" name="Action" value="Submit" class="btn btn-primary" />
+    <input type="submit" name="Action" value="Save" class="btn btn-primary" />
+
+}
+
+<script>
+
+    $('input[type=radio][name=CustomerType]').change(function () {
+        console.log(this.value);
+        $('#selected-customer').find('option').css('display', 'none');
+        $('option[data-logicalEntity=' + this.value + ']').css("display", "");
+        $('#selected-customer').val();
+    });
+</script>
+@section MyJs{
+
+    $('#dayPicker').datetimepicker();
+        $('#selected-customer').val("");
+    
+}

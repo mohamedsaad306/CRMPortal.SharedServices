@@ -1,10 +1,11 @@
 ﻿@model CRMPortal.SharedServices.ViewModels.HelpDeskFormViewModel
+<script type="text/javascript" src="/scripts/jquery-3.1.1.js"></script>
 
 @{
     ViewBag.Title = "Edit";
 }
 
-@using (@Html.BeginForm("Save", "HelpDesk"))
+@using (@Html.BeginForm("Save", "HelpDesk", FormMethod.Post, new {id = "request-form"  }))
 {
     <div class="form-group">
         @Html.LabelFor(r => r.RequestTitle)
@@ -16,3 +17,17 @@
     </div>
 
 }
+
+<script type="text/javascript">
+
+    var k = @Html.Raw(Model.isReadOnly.ToString().ToLower());
+    k = true;
+        if (k) {
+            console.log($('#request-form :input'));
+            $("#request-form :input").prop("readonly", true);
+
+            //$('#request-form').find("input").addClass("disabled");
+
+        }
+
+</script>

@@ -1,6 +1,7 @@
 ﻿using CRMPortal.SharedServices.AuthenticationLayer;
 using CRMPortal.SharedServices.Models;
 using CRMPortal.SharedServices.Models.DomainModels;
+using CRMPortal.SharedServices.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data.Objects.DataClasses;
@@ -36,22 +37,22 @@ namespace CRMPortal.SharedServices.Controllers.Api
 
         [HttpPost]
         [ActionName("CheckRoomAvailability")]
-        public IHttpActionResult CheckRoomAvailability(DateTime? _reservationDay, string _roomId)
+        public IHttpActionResult CheckRoomAvailability([FromBody]RoomReservationFormViewModel occ)
         {
 
-            Guid roomId = new Guid(_roomId);
+            Guid roomId = occ.RoomToReserve;
             // chek if user is authorized to acess this data 
             if (HttpContext.Current.Session["LoggedInUserId"].ToString()==null)
                 return NotFound();
             
-            if (_reservationDay == null || roomId == null)
+            if (occ.Day == null || roomId == null)
                 return BadRequest("Please provide day and select room to complete the request ");
             
 
             UnitOfWork uof;
             new_roomreservationrequest r = new new_roomreservationrequest(){
-                new_DateFrom= _reservationDay,   
-                new_DateTo=_reservationDay,
+                new_DateFrom= occ.DateFrom,   
+                new_DateTo=occ.DateTo,
                 new_Room = new Microsoft.Xrm.Sdk.EntityReference(new_room.EntityLogicalName, roomId)
             };
 
@@ -59,8 +60,8 @@ namespace CRMPortal.SharedServices.Controllers.Api
 
             List<new_roomoccupation> requests =
                 uof.RoomReservationModel.GetRoomOccupations(r);
-            
-            return Ok();
+
+            return Ok(requests);
         }
 
         [HttpGet]
