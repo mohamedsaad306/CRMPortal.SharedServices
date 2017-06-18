@@ -20,9 +20,14 @@ namespace CRMPortal.SharedServices.ViewModels
         
         [Display(Name = "Details")]
         public string RequestDetails { get; set; }
-
         public bool isReadOnly { get; set; }
 
+        public List<new_helpdeskcategory> Categories { get; set; }
+        public List<new_helpdeskrequestsubcategory> SubCategories { get; set; }
+        public Guid Category { get; set; }
+        public Guid SubCategory { get; set; }
+
+        public HelpDeskRequest HelpDeskRequest { get; set; }
     }
 
 

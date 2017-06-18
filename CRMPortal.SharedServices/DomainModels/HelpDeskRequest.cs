@@ -13,5 +13,8 @@ namespace CRMPortal.SharedServices.Models.DomainModels
         //public DateTime CreatedAt { get; set; }
         //public string StatusReason { get; set; }
         //public string RequestNumber { get; set; }
+
+        public Guid Category { get; set; }
+        public Guid SubCategory { get; set; }
     }
 }

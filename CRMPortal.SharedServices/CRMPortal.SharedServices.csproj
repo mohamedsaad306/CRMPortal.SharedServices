@@ -147,6 +147,7 @@
     <Compile Include="Controllers\TransportationController.cs" />
     <Compile Include="DomainModels\crmClass_6-6.cs" />
     <Compile Include="DomainModels\Customer.cs" />
+    <Compile Include="DomainModels\HelpDeskCategory.cs" />
     <Compile Include="DomainModels\PurchaseOrderRequest.cs" />
     <Compile Include="DomainModels\Request.cs" />
     <Compile Include="DomainModels\RoomReservationRequest.cs" />
@@ -160,6 +161,7 @@
     <Compile Include="Models\AuthenticationCredintial.cs" />
     <Compile Include="Models\ContactModel.cs" />
     <Compile Include="DomainModels\HelpDeskRequest.cs" />
+    <Compile Include="Models\HelpDeskCategoryModel.cs" />
     <Compile Include="Models\HelpDeskModel.cs" />
     <Compile Include="Models\PurchaseOrderModel.cs" />
     <Compile Include="Models\Repository.cs" />

@@ -14,7 +14,6 @@ namespace CRMPortal.SharedServices.Models
             : base(ctx, orgService)
         {
         }
-
         public List<Entity> GetAllCustomers(int PageIndex = 0, int pageSize = 10)
         {
             List<Entity> customers = new List<Entity>();
@@ -27,7 +26,6 @@ namespace CRMPortal.SharedServices.Models
 
             return customers;
         }
-
         public List<Entity> GetAllCustomers()
         {
             List<Entity> customers = new List<Entity>();
@@ -52,7 +50,6 @@ namespace CRMPortal.SharedServices.Models
 
             return customers;
         }
-
         public List<Entity> GetCustomersForEmployee(Guid empId)
         {
             List<Entity> customers = new List<Entity>();
@@ -80,8 +77,6 @@ namespace CRMPortal.SharedServices.Models
 
             return customers;
         }
-
-
         internal List<SharedServices.DomainModels.Customer> GetAllAsCustomer()
         {
             List<Entity> customers = GetAllCustomers();

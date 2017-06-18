@@ -75,8 +75,6 @@ namespace CRMPortal.SharedServices.Controllers
 
             uof.Transportations.Add(request);
 
-
-
             return RedirectToAction("Edit");
         }
     }

@@ -38,7 +38,8 @@ namespace CRMPortal.SharedServices.Models
                         NumberOfitems = r.Attributes.Keys.Contains("new_numberofitems") ? r["new_numberofitems"].ToString() : "",
                         Purpose = r.Attributes.Keys.Contains("new_purpose") ? r["new_purpose"].ToString() : "",
                         StatusReason = r.Attributes.Keys.Contains("statuscode") ? r.FormattedValues["statuscode"].ToString() : "",
-                        RequestType = "Purchase Order"
+                        RequestType = "Purchase Order", 
+                        
 
                     });
                 }

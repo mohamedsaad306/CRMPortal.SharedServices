@@ -37,6 +37,8 @@ namespace CRMPortal.SharedServices.Models
 
         public TransportationModel Transportations { get { return new TransportationModel(_context, OrganizaionService); } }
         public CustomerModel Customers { get { return new CustomerModel(_context, OrganizaionService); } }
+        public HelpDeskCategoryModel HelpDeskRequestCategories { get { return new HelpDeskCategoryModel(_context, OrganizaionService); } }
+        public HelpDeskSubCategoryModel HelpDeskRequestSubCategories { get { return new HelpDeskSubCategoryModel(_context, OrganizaionService); } }
         
     }
 }

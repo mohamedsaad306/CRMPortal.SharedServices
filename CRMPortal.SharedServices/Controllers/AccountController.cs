@@ -24,7 +24,11 @@ namespace CRMPortal.SharedServices.Controllers
         {
             return View();
         }
-
+        public ActionResult LogOut()
+        {
+            Session.Abandon();
+            return RedirectToAction("Login");
+        }
 
         [HttpPost]
         public ActionResult Login(AccountViewModel acc, string x)

@@ -16,7 +16,7 @@
         foreach (var r in Model.Requests)
         {
            <tr>
-               <td>@r.RequestTitle</td>
+               <td><a href="/HelpDesk/Edit/@r.Id">@r.RequestTitle</a></td>
                <td>@r.RequestNumber</td>
                <td>@r.RequestDetails</td>
                <td>@r.StatusReason</td>

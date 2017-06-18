@@ -36,12 +36,30 @@ namespace CRMPortal.SharedServices.Controllers
             HelpDeskIndexViewModel vm = new HelpDeskIndexViewModel() { Requests = viewRequests };
             uof.Dispose();
             return View(vm);
-        }
+        }  
 
 
         public ActionResult Edit(Guid? id)
         {
+            if (Session["LoggedInUserId"] == null)
+            {
+                TempData["info"] = "Please Login to Access this Page.. ";
+                return RedirectToAction("Login", "Account");
+            }
+            uof = Auth.GetContext(Session["LoggedInUser"].ToString(), Session["LoggedInPassword"].ToString());
+            
             HelpDeskFormViewModel vm = new HelpDeskFormViewModel ();
+            HelpDeskRequest tr = null;
+            if (id!=null)
+            {
+                //Guid usrId= new Guid(Session[""])
+                tr = uof.HelpDeskModel.GetById(new Guid(Session["LoggedInUserId"].ToString()), id);
+            }
+            
+            vm.Categories = uof.HelpDeskRequestCategories.GetAllCategories();
+            vm.SubCategories = uof.HelpDeskRequestSubCategories.GetAllSubCategories();
+            vm.HelpDeskRequest = tr;
+
             return View(vm);
         }
 
@@ -61,6 +79,9 @@ namespace CRMPortal.SharedServices.Controllers
             req["new_name"] = _r.RequestTitle;
             req["new_requestdetails"] = _r.RequestDetails;
             req["new_action"] = new OptionSetValue(100000000);
+
+            req["new_helpdeskcategoryid"] = new EntityReference(new_helpdeskcategory.EntityLogicalName,_r.Category);
+            req["new_subcategory"] = new EntityReference(new_helpdeskrequestsubcategory.EntityLogicalName,_r.SubCategory);
 
             Guid uid = new Guid(Session["LoggedInUserId"].ToString());
             req["new_relatedemployeeid"] = new EntityReference("systemuser", uid);
