@@ -29,6 +29,7 @@ namespace CRMPortal.SharedServices.Controllers
 
 
             uof = Auth.GetContext(Session["LoggedInUser"].ToString(), Session["LoggedInPassword"].ToString());
+<<<<<<< HEAD
             List<Entity> requests = uof.PurchaseOrderModel.GetAllRequests(new Guid(Session["LoggedInUserId"].ToString()));
 
             List<PurchaseOrderRequest> viewRequests = new List<PurchaseOrderRequest>();
