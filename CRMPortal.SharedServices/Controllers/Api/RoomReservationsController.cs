@@ -39,7 +39,6 @@ namespace CRMPortal.SharedServices.Controllers.Api
         [ActionName("CheckRoomAvailability")]
         public IHttpActionResult CheckRoomAvailability([FromBody]RoomReservationFormViewModel occ)
         {
-
             Guid roomId = occ.RoomToReserve;
             // chek if user is authorized to acess this data 
             if (HttpContext.Current.Session["LoggedInUserId"].ToString()==null)

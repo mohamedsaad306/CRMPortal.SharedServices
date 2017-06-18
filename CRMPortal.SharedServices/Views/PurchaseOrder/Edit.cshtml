@@ -30,7 +30,8 @@
                             </div>
 
                             <div class="col-md-6 col-sm-6">
-                                @Html.TextBoxFor(m => m.RequestTitle, new { @class = "form-control" })
+                                @Html.TextBoxFor(m => m.RequestTitle, new { @class = "form-control t" })
+                                @*<input type="text" value="@Model.RequestTitle" class="form-control" @ViewBag.IsReadOnly />*@
                             </div>
                         </div>
 
@@ -40,7 +41,8 @@
 
                             </div>
                             <div class="col-md-6 col-sm-6">
-                                @Html.TextBoxFor(m => m.NumberOfitems, new { @class = "form-control" })
+                                @Html.TextBoxFor(m => m.NumberOfitems, new { @class = "form-control t" })
+                                @*<input type="number" value="@Model.NumberOfitems" class="form-control" @ViewBag.IsReadOnly />*@
                             </div>
                         </div>
 
@@ -50,17 +52,19 @@
 
                             </div>
                             <div class="col-md-6 col-sm-6">
-                                @Html.TextBoxFor(m => m.ItemName, new { @class = "form-control" })
+                                @Html.TextBoxFor(m => m.ItemName, new { @class = "form-control t" })
+                                @*<input type="text" value="@Model.ItemName" class="form-control" @ViewBag.IsReadOnly />*@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group" !hidden>
                             <div class="col-md-6 col-sm-6">
                                 @Html.LabelFor(m => m.Purpose)
                             </div>
 
                             <div class="col-md-6 col-sm-6">
-                                @Html.TextBoxFor(m => m.Purpose, new { @class = "form-control" })
+                                @Html.TextBoxFor(m => m.Purpose, new { @class = "form-control t" })
+                                @*<input type="text" value="@Model.Purpose" class = "form-control" @ViewBag.IsReadOnly />*@
                             </div>
                         </div>
 
@@ -68,8 +72,8 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            <input type="submit" name="saveOrDraft" value="Submit Request" class="btn btn-primary" />
-                            <input type="submit" name="saveOrDraft" value="Save as Draft" class="btn btn-default" />
+                            <button type="submit" name="isReadOnly" value="@ViewBag.IsReadOnly" class="btn btn-primary">Submit Request</button>
+                            <button type="submit" name="isReadOnly" value="@ViewBag.IsReadOnly" class="btn btn-default">Save as Draft</button>
                             @Html.ActionLink("Cancel", "Index", "PurchaseOrder", new { @class = "btn btn-default" })
                             @* @Html.ActionLink("Save", "Save", "PurchaseOrder", new { @class = "btn btn-success" })*@
                             @*@Html.ActionLink("Save as Draft", "Draft", "PurchaseOrder", new { @class = "btn btn-default" })*@
@@ -87,3 +91,13 @@
 
     </div>
 }
+<script type="text/javascript" src="/scripts/jquery-3.1.1.js"></script>
+
+<script>
+    (function () {
+        var isReadOnly = '@(ViewBag.IsReadOnly)';
+        if (isReadOnly == 'readonly') {
+            $('.t').prop('readonly', true);
+        }
+    })();
+</script>

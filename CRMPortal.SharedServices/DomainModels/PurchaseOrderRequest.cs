@@ -7,12 +7,7 @@ namespace CRMPortal.SharedServices.Models.DomainModels
 {
     public class PurchaseOrderRequest:Request
     {
-        //public string RequestTitle { get; set; }
-       
-        //public string Status { get; set; }
-        //public DateTime CreatedAt { get; set; }
-        //public string StatusReason { get; set; }
-        //public string RequestNumber { get; set; }
+        public string ItemName { get; set; }
         public string NumberOfitems { get; set; }
         public string Purpose { get; set; }
         public Guid PK { get; set; }
@@ -20,14 +15,14 @@ namespace CRMPortal.SharedServices.Models.DomainModels
         {
             get
             {
-                return RequestNumber != "" ? "View Details" : "Submit";
+                return RequestNumber != "" ? "View Details" : "Edit Request";
             }
         }
         public string GetButtonClass
         {
             get
             {
-                return RequestNumber != "" ? "default" : "success";
+                return RequestNumber != "" ? "default" : "info";
             }
         }
     }

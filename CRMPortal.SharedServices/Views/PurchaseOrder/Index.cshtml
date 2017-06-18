@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Index";
 }
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+@*<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />*@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.8.1/bootstrap-table.min.css">
 
 <style>
@@ -50,7 +50,7 @@
                         <thead>
                             <tr>
                                 @*<th data-field="state" data-checkbox="true"></th>*@
-                                <th data-field="pk" hidden>PK</th>
+                                <th hidden="hidden">PK</th>
                                 <th data-field="title">Title</th>
                                 <th data-field="request_number">Request Number</th>
                                 <th data-field="items">#Items</th>
@@ -60,19 +60,20 @@
                         </thead>
                         <tbody>
                             @{
-                                for (int i = 0; i < 20; i++)
+                                //for (int i = 0; i < 20; i++)
                                 {
                                     foreach (var r in Model.Requests)
                                     {
                                         <tr>
-                                            <td class="nr" hidden>@r.PK</td>
+                                            <td class="nr" hidden="hidden">@r.PK</td>
                                             <td>@r.RequestTitle</td>
                                             <td>@r.RequestNumber</td>
                                             <td>@r.NumberOfitems</td>
                                             <td>@r.StatusReason</td>
                                             <td>
-                                                <input type="button" name="id2" value="@r.GetButtonValue" class="btn btn-@r.GetButtonClass ccc">
-                                                <input type="submit" name="id" value="@r.PK" hidden id="btnpk" class="nn">
+                                                @*<input type="button" name="id2" value="@r.GetButtonValue" class="btn btn-@r.GetButtonClass ccc">
+                                                <input type="submit" name="id" value="@r.PK" hidden id="btnpk" class="nn">*@
+                                                <button style="width:100px" name="id" value="@r.PK" class="btn btn-@r.GetButtonClass">@r.GetButtonValue</button>  
                                             </td>
                                         </tr>
                                     }
@@ -93,9 +94,9 @@
 
     <script>
 
-        
+
         (function () {
-            
+
             $(".ccc").click(function () {
                 var $item = $(this).closest("tr")   // Finds the closest row <tr>
                                    .find(".nn")     // Gets a descendent with class="nr"
