@@ -13,5 +13,6 @@ namespace CRMPortal.SharedServices.Models.DomainModels
         public string Status { get; set; }
         public string StatusReason { get; set; }
         public DateTime CreatedAt { get; set; }
+        public String RequestType { get; set; }
     }
 }

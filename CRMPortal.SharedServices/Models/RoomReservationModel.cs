@@ -1,4 +1,5 @@
 ﻿using CRMPortal.SharedServices.AuthenticationLayer;
+using CRMPortal.SharedServices.DomainModels;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Client;
 using System;
@@ -68,5 +69,36 @@ namespace CRMPortal.SharedServices.Models
             occupations = occupations.Where(oo => oo.new_Occupiedfrom.Value.Date == request.new_DateFrom.Value.Date).ToList();
             return occupations;
          }
+
+        internal List<RoomReservationRequest> GetAllAsReservationRequest(Guid usrGuid)
+        {
+            List<Entity> _requests = GetAllRequests(usrGuid);
+            List<RoomReservationRequest> viewRequests = new List<RoomReservationRequest>();
+
+            foreach (var r in _requests)
+            {
+                try
+                {
+                    viewRequests.Add(
+                                new RoomReservationRequest
+                                {
+                                    CreatedAt = DateTime.Parse(r["createdon"].ToString()),
+                                    RequestTitle = (r.Attributes.Keys.Contains("new_name")) ? r["new_name"].ToString() : "",
+                                    StatusReason = r.FormattedValues["statuscode"].ToString(),
+                                    DateFrom = DateTime.Parse(r["new_datefrom"].ToString()),
+                                    DateTo = DateTime.Parse(r["new_dateto"].ToString()),
+                                    RequestType = "Room Reservation"
+                                }
+                                );
+                }
+                catch (KeyNotFoundException)
+                {
+
+                    //TempData["info"] = "some data Didn't didn't load correctly please try again later ..";
+                    continue;
+                }
+            }
+            return viewRequests;
+        }
     }
 }

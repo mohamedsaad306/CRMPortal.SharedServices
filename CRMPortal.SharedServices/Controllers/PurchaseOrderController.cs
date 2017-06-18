@@ -29,39 +29,15 @@ namespace CRMPortal.SharedServices.Controllers
 
 
             uof = Auth.GetContext(Session["LoggedInUser"].ToString(), Session["LoggedInPassword"].ToString());
-            List<Entity> requests = uof.PurchaseOrderModel.GetAllRequests(new Guid(Session["LoggedInUserId"].ToString()));
-
-            List<PurchaseOrderRequest> viewRequests = new List<PurchaseOrderRequest>();
-            foreach (var r in requests)
-            {
-                try
-                {
-                    //bool x = r.Attributes.Keys.Contains("new_name");
-                    viewRequests.Add(new PurchaseOrderRequest
-                    {
- 
-                        CreatedAt = r.Attributes.Keys.Contains("createdon") ? DateTime.Parse(r["createdon"].ToString()) : new DateTime(),
-                        RequestTitle = r.Attributes.Keys.Contains("new_name") ? r["new_name"].ToString() : "",
-                        RequestNumber = r.Attributes.Keys.Contains("new_requestnumber") ? r["new_requestnumber"].ToString() : "",
-                        NumberOfitems = r.Attributes.Keys.Contains("new_numberofitems") ? r["new_numberofitems"].ToString() : "",
-                        Purpose = r.Attributes.Keys.Contains("new_purpose") ? r["new_purpose"].ToString() : "",
- 
-                        StatusReason = r.Attributes.Keys.Contains("statuscode") ? r.FormattedValues["statuscode"].ToString() : ""//,
-
-                    });
-                }
-                catch (KeyNotFoundException)
-                {
-                    TempData["info"] = "Some Data Wasn't ready Please refresh this page again in few seconds ... ";
-                    continue;
-                }
-            }
+            
+            List<PurchaseOrderRequest> viewRequests = uof.PurchaseOrderModel.GetAllAsPurchaseOrderRequest(new Guid(Session["LoggedInUserId"].ToString()));
 
             PurchaseOrderViewModel vm = new PurchaseOrderViewModel() { Requests = viewRequests };
             uof.Dispose();
             return View(vm);
         }
 
+    
         public ActionResult Edit(Guid? id)
         {
             return View();

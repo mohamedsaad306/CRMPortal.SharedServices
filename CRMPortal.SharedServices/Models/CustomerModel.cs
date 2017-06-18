@@ -1,4 +1,5 @@
-﻿using Microsoft.Xrm.Sdk;
+﻿using CRMPortal.SharedServices.DomainModels;
+using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Client;
 using System;
 using System.Collections.Generic;
@@ -80,5 +81,33 @@ namespace CRMPortal.SharedServices.Models
             return customers;
         }
 
+
+        internal List<SharedServices.DomainModels.Customer> GetAllAsCustomer()
+        {
+            List<Entity> customers = GetAllCustomers();
+            List<Customer> viewCustomers = new List<Customer>();
+
+            foreach (var c in customers)
+            {
+                string name;
+                if (c.LogicalName == Contact.EntityLogicalName)
+                {
+                    name = (c.Attributes.Contains("firstname")) ? c["firstname"].ToString() : "" + c["lastname"].ToString();
+                }
+                else
+                {
+                    name = c["name"].ToString();
+                }
+                Customer tc = new Customer()
+                {
+                    Id = c.Id,
+                    LogicalName = c.LogicalName,
+                    Name = name
+                };
+
+                viewCustomers.Add(tc);
+            }
+            return viewCustomers;
+        }
     }
 }

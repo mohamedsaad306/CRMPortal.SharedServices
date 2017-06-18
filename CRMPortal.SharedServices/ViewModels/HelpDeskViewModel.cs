@@ -20,7 +20,9 @@ namespace CRMPortal.SharedServices.ViewModels
         
         [Display(Name = "Details")]
         public string RequestDetails { get; set; }
-        
+
+        public bool isReadOnly { get; set; }
+
     }
 
 

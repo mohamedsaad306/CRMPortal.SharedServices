@@ -1,4 +1,5 @@
-﻿using Microsoft.Xrm.Sdk;
+﻿using CRMPortal.SharedServices.Models.DomainModels;
+using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Client;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,37 @@ namespace CRMPortal.SharedServices.Models
             Context.AddObject(req);
             Context.SaveChanges();
         }
+
+        public List<HelpDeskRequest> GetAllAsHelpDeskRequests(Guid usr_id)
+        {
+            List<Entity> requests = GetAllRequests(usr_id);
+            List<HelpDeskRequest> viewRequests = new List<HelpDeskRequest>();
+            foreach (var r in requests)
+            {
+
+                try
+                {
+                    viewRequests.Add(new HelpDeskRequest
+                    {
+                        CreatedAt = DateTime.Parse(r["createdon"].ToString()),
+                        RequestTitle = r["new_name"].ToString(),
+                        RequestNumber = r["new_requestnumber"].ToString(),
+                        RequestDetails = r["new_requestdetails"].ToString(),
+                        StatusReason = r.FormattedValues["statuscode"].ToString(), 
+                        RequestType= "Help Desk"
+                    });
+                }
+                catch (KeyNotFoundException )
+                {
+                    //TempData["info"] = "Some Data Wasn't ready Please refresh this page again in few seconds ... ";
+                    continue;
+                }
+            }
+
+            return viewRequests;
+        }
+
+
         //public Entity Entity
         //{
         //    get

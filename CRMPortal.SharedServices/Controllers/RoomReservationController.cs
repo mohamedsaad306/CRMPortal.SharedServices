@@ -26,32 +26,9 @@ namespace CRMPortal.SharedServices.Controllers
             }
 
             uof = Auth.GetContext(Session["LoggedInUser"].ToString(), Session["LoggedInPassword"].ToString());
-            List<Entity> _requests = uof.RoomReservationModel.GetAllRequests(new Guid(Session["LoggedInUserId"].ToString()));
-            List<RoomReservationRequest> viewRequests = new List<RoomReservationRequest>();
-            
 
-            foreach (var r in _requests)
-            {
-                try
-                {
-                    viewRequests.Add(
-                                new RoomReservationRequest
-                                {
-                                    CreatedAt = DateTime.Parse(r["createdon"].ToString()),
-                                    RequestTitle = (r.Attributes.Keys.Contains("new_name")) ? r["new_name"].ToString() : "",
-                                    StatusReason = r.FormattedValues["statuscode"].ToString(),
-                                    DateFrom = DateTime.Parse(r["new_datefrom"].ToString()),
-                                    DateTo = DateTime.Parse(r["new_dateto"].ToString())
-                                }
-                                );
-                }
-                catch (KeyNotFoundException)
-                {
 
-                    TempData["info"] = "some data Didn't didn't load correctly please try again later ..";
-                    continue;
-                }
-            }
+            List<RoomReservationRequest> viewRequests = uof.RoomReservationModel.GetAllAsReservationRequest(new Guid(Session["LoggedInUserId"].ToString()));
             RoomReservationViewModel vm = new RoomReservationViewModel() { requests = viewRequests };
             return View(vm);
         }
