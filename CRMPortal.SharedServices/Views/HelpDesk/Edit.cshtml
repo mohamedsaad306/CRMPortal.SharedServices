@@ -8,6 +8,11 @@
 @using (@Html.BeginForm("Save", "HelpDesk", FormMethod.Post, new { id = "request-form" }))
 {
     <div class="form-group">
+        @Html.LabelFor(r => r.HelpDeskRequest.StatusReason)
+        <label class="">(@Model.HelpDeskRequest.StatusReason)</label>
+    </div>
+
+    <div class="form-group">
         @Html.LabelFor(r => r.HelpDeskRequest.RequestTitle)
         @Html.TextBoxFor(r => r.HelpDeskRequest.RequestTitle, new { @class = "form-control" })
     </div>
@@ -27,7 +32,7 @@
         @Html.LabelFor(r => r.HelpDeskRequest.SubCategory)
         @Html.DropDownListFor(r => r.HelpDeskRequest.SubCategory, new SelectList(Model.SubCategories, "Id", "new_name"), "Select Subcategory  ", new { @class = "form-control", id = "selected-room" })
     </div>
-    
+
     <div class="form-group">
         <input type="submit" name="name" value="Submit Request" class="btn btn-primary" />
     </div>
@@ -36,12 +41,13 @@
 
 <script type="text/javascript">
 
-    var k = @Html.Raw(Model.isReadOnly.ToString().ToLower());
-    var k = true;
+    var k = @Html.Raw(Model.HelpDeskRequest.isReadOnly.ToString().ToLower());
+    //var k = true;
     if (k) {
         console.log($('#request-form :input'));
         $("#request-form :input ").prop("readonly", true);
-        $("#request-form :select").prop("readonly", true);
+        $("#request-form :option").prop("readonly", true);
+        $("#request-form :select").attr("disabled", true);
         $("#request-form   [type=submit]").prop("disabled", true);
 
         //$('#request-form').find("input").addClass("disabled");

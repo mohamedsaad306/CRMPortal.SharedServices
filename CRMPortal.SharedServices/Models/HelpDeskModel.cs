@@ -17,7 +17,9 @@ namespace CRMPortal.SharedServices.Models
         public List<Entity> GetAllRequests(Guid usr_id)
         {
 
+     
             return Context.CreateQuery("new_helpdeskrequest").Where(r => r["new_relatedemployeeid"] == new EntityReference("systemuser", usr_id)).ToList();
+
         }
         internal void SubmitRequest(Entity req)
         {
@@ -32,10 +34,11 @@ namespace CRMPortal.SharedServices.Models
         public List<HelpDeskRequest> GetAllAsHelpDeskRequests(Guid usr_id)
         {
             List<Entity> requests = GetAllRequests(usr_id);
+            
             List<HelpDeskRequest> viewRequests = new List<HelpDeskRequest>();
             foreach (var r in requests)
             {
-
+                
                 try
                 {
                     HelpDeskRequest req = new HelpDeskRequest
@@ -46,10 +49,17 @@ namespace CRMPortal.SharedServices.Models
                         RequestNumber = r.Attributes.Keys.Contains("new_requestnumber") ? r["new_requestnumber"].ToString() : "",
                         RequestDetails = r.Attributes.Keys.Contains("new_requestdetails") ? r["new_requestdetails"].ToString() : "",
                         StatusReason = r.FormattedValues["statuscode"].ToString(),
-                        RequestType = "Help Desk"
+                        RequestType = "Help Desk",
+                        Category = r.Attributes.Keys.Contains("new_helpdeskcategoryid") ? ((EntityReference)r["new_helpdeskcategoryid"]).Id : Guid.Empty,
+                        SubCategory = r.Attributes.Keys.Contains("new_subcategory") ? ((EntityReference)r["new_subcategory"]).Id : Guid.Empty
+                                                  
                     };
 
-                    if (r["statuscode"] != "Draft" || r["statuscode"] != "New")
+                    if (r.FormattedValues["statuscode"] == "Draft" || r.FormattedValues["statuscode"] == "New")
+                    {
+                        req.isReadOnly = false;
+                    }
+                    else
                     {
                         req.isReadOnly = true;
                     }
