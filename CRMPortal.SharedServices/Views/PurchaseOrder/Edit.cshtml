@@ -6,6 +6,11 @@
 
 <h2>Initiate New Purchase Order Request</h2>
 
+<style>
+    div{
+        margin-top:8px;
+    }
+</style>
 
 @using (Html.BeginForm("Save", "PurchaseOrder"))
 {
@@ -30,7 +35,8 @@
                             </div>
 
                             <div class="col-md-6 col-sm-6">
-                                @Html.TextBoxFor(m => m.RequestTitle, new { @class = "form-control" })
+                                @Html.TextBoxFor(m => m.RequestTitle, new { @class = "form-control t" })
+                                @*<input type="text" value="@Model.RequestTitle" class="form-control" @ViewBag.IsReadOnly />*@
                             </div>
                         </div>
 
@@ -40,7 +46,8 @@
 
                             </div>
                             <div class="col-md-6 col-sm-6">
-                                @Html.TextBoxFor(m => m.NumberOfitems, new { @class = "form-control" })
+                                @Html.TextBoxFor(m => m.NumberOfitems, new { @class = "form-control t" })
+                                @*<input type="number" value="@Model.NumberOfitems" class="form-control" @ViewBag.IsReadOnly />*@
                             </div>
                         </div>
 
@@ -50,7 +57,8 @@
 
                             </div>
                             <div class="col-md-6 col-sm-6">
-                                @Html.TextBoxFor(m => m.ItemName, new { @class = "form-control" })
+                                @Html.TextBoxFor(m => m.ItemName, new { @class = "form-control t" })
+                                @*<input type="text" value="@Model.ItemName" class="form-control" @ViewBag.IsReadOnly />*@
                             </div>
                         </div>
 
@@ -60,16 +68,28 @@
                             </div>
 
                             <div class="col-md-6 col-sm-6">
-                                @Html.TextBoxFor(m => m.Purpose, new { @class = "form-control" })
+                                @Html.TextBoxFor(m => m.Purpose, new { @class = "form-control t" })
+                                @*<input type="text" value="@Model.Purpose" class = "form-control" @ViewBag.IsReadOnly />*@
                             </div>
                         </div>
 
                     </div>
 
+                    <div class="form-group status" hidden>
+                        <div class="col-md-6 col-sm-6">
+                            @Html.LabelFor(m => m.StatusReason)
+                        </div>
+
+                        <div class="col-md-6 col-sm-6">
+                            @Html.TextBoxFor(m => m.StatusReason, new { @class = "form-control", @readonly = "readonly" })
+                            @*<input type="text" value="@Model.Purpose" class = "form-control" @ViewBag.IsReadOnly />*@
+                        </div>
+                    </div>
+
                     <div class="row">
                         <div class="col-md-12">
-                            <input type="submit" name="saveOrDraft" value="Submit Request" class="btn btn-primary" />
-                            <input type="submit" name="saveOrDraft" value="Save as Draft" class="btn btn-default" />
+                            <button type="submit" name="saveOrDraft" value="Submit Request" class="btn btn-primary dd">Submit Request</button>
+                            <button type="submit" name="saveOrDraft" value="Save as Draft" class="btn btn-default dd">Save as Draft</button>
                             @Html.ActionLink("Cancel", "Index", "PurchaseOrder", new { @class = "btn btn-default" })
                             @* @Html.ActionLink("Save", "Save", "PurchaseOrder", new { @class = "btn btn-success" })*@
                             @*@Html.ActionLink("Save as Draft", "Draft", "PurchaseOrder", new { @class = "btn btn-default" })*@
@@ -87,3 +107,15 @@
 
     </div>
 }
+<script type="text/javascript" src="/scripts/jquery-3.1.1.js"></script>
+
+<script>
+    (function () {
+        var isReadOnly = '@(ViewBag.IsReadOnly)';
+        if (isReadOnly == 'readonly') {
+            $('.t').prop('readonly', true);
+            $('.dd').hide();
+            $('.status').show();
+        }
+    })();
+</script>

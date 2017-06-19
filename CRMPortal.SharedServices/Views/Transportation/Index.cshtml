@@ -3,30 +3,56 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Transportation Requests</h2>
+<div class="container">
 
-@Html.ActionLink("New Reqest", "Edit", "Transportation", null, new { @class = "label label-success" })
-<br />
-<table class="table table-hover table-striped">
-    <tr>
-        <th>Title</th>
-        <th>Request Number</th>
-        <th>Date</th>
-        <th>Related Client  </th>
-        <th>Status</th>
-    </tr>
-    @{
-        foreach (var r in Model.requests)
-        {
-            <tr>
-                <td>@r.RequestTitle</td>
-                <td>@r.RequestNumber</td>
-                <td>@r.TransportationDate</td>
-                <td>@r.RelatedClient </td>
-                <td>@r.StatusReason</td>
-            </tr>
-        }
-    }
-</table>
+    <div class="clearfix"></div>
 
-`
+    <fieldset>
+        <legend class="legend">Transportation Requests</legend>
+
+        <div class="panel">
+
+            <div class="panel-body">
+
+                <div>
+                    @Html.ActionLink("Create Transportation Request", "Edit", "Transportation", null, new { @class = "new" })
+                </div>
+                <div style="margin-top: 10px"></div>
+
+                <table data-toggle="table"
+                       data-pagination="true"
+                       data-search="true"
+                       data-show-refresh="true"
+                       data-show-toggle="true"
+                       data-show-columns="true"
+                       data-toolbar="#toolbar"
+                       class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Request Number</th>
+                            <th>Date</th>
+                            <th>Related Client  </th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (var r in Model.requests)
+                            {
+                                <tr>
+                                    <td>@r.RequestTitle</td>
+                                    <td>@r.RequestNumber</td>
+                                    <td>@r.TransportationDate</td>
+                                    <td>@r.RelatedClient </td>
+                                    <td>@r.StatusReason</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </fieldset>
+</div>
