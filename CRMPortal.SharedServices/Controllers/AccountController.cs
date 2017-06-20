@@ -96,14 +96,17 @@ namespace CRMPortal.SharedServices.Controllers
             List<HelpDeskRequest> helpDeskRequests = uof.HelpDeskModel.GetAllAsHelpDeskRequests(usrId);
             List<PurchaseOrderRequest> purchasesRequests = uof.PurchaseOrderModel.GetAllAsPurchaseOrderRequest(usrId);
             List<RoomReservationRequest> reservationRequests = uof.RoomReservationModel.GetAllAsReservationRequest(usrId);
-            List<Transportation> transportationReqests = uof.Transportations.GetAllAsTransportaion(usrId);
+            List<Transportation> transportationRequests = uof.Transportations.GetAllAsTransportaion(usrId);
+            List<VacationRequest> VacationRequests = uof.VacationRequests.GetAllAsVacationRequests(usrId);
+
 
 
 
             currentRequests.AddRange(helpDeskRequests);
             currentRequests.AddRange(purchasesRequests);
             currentRequests.AddRange(reservationRequests);
-            currentRequests.AddRange(transportationReqests);
+            currentRequests.AddRange(transportationRequests);
+            currentRequests.AddRange(VacationRequests);
             
             AccountHomeViewModel vm = new AccountHomeViewModel { Requests = currentRequests };
             
