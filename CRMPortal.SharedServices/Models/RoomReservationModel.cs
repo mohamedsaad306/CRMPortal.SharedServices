@@ -82,6 +82,7 @@ namespace CRMPortal.SharedServices.Models
                     viewRequests.Add(
                                 new RoomReservationRequest
                                 {
+                                    Id=r.Id,
                                     CreatedAt = DateTime.Parse(r["createdon"].ToString()),
                                     RequestTitle = (r.Attributes.Keys.Contains("new_name")) ? r["new_name"].ToString() : "",
                                     StatusReason = r.FormattedValues["statuscode"].ToString(),

@@ -2,9 +2,9 @@
 @{
     ViewBag.Title = "Index";
 }
- 
-@Html.ActionLink("New Reqest", "Edit", "HelpDesk", null, new { @class = "label label-success" }) 
-<br />
+
+@*@Html.ActionLink("New Reqest", "Edit", "HelpDesk", null, new { @class = "label label-success" })
+    <br />*@
 <div class="container">
 
     <div class="clearfix"></div>
@@ -24,10 +24,10 @@
                 <table data-toggle="table"
                        data-pagination="true"
                        data-search="true"
-                       data-show-refresh="true"
+                       data-show-refresh="false"
                        data-show-toggle="true"
                        data-show-columns="true"
-                       data-toolbar="#toolbar"
+                       @*data-toolbar="#toolbar"*@
                        class="table table-hover table-striped">
                     <thead>
                         <tr>
@@ -35,6 +35,7 @@
                             <th>Request Number </th>
                             <th>Details</th>
                             <th>Status</th>
+                            <th>Current Responsable</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -46,7 +47,12 @@
                                     <td>@r.RequestNumber</td>
                                     <td>@r.RequestDetails</td>
                                     <td>@r.StatusReason</td>
+                                    <td>@r.RequestOwner</td>
                                 </tr>
+                            }
+                            if (Model.Requests.Count == 0)
+                            {
+                                <h4>No Current Requests to display </h4>
                             }
                         }
                     </tbody>

@@ -25,5 +25,6 @@ namespace CRMPortal.SharedServices.ViewModels
         public string Action { get; set; }
 
 
+        public Transportation Request { get; set; }
     }
 }

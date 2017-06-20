@@ -17,6 +17,7 @@ namespace CRMPortal.SharedServices.Models.DomainModels
         public String RequestType { get; set; }
         public bool isReadOnly { get; set; }
         public List<string> AvailableActions { get; set; }
+        public object RequestOwner { get; set; }
 
     }
 }

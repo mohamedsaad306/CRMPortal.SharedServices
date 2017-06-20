@@ -31,7 +31,7 @@ namespace CRMPortal.SharedServices.Models
                     //bool x = r.Attributes.Keys.Contains("new_name");
                     viewRequests.Add(new PurchaseOrderRequest
                     {
-                        PK = r.Id,
+                        Id = r.Id,
                         CreatedAt = r.Attributes.Keys.Contains("createdon") ? DateTime.Parse(r["createdon"].ToString()) : new DateTime(),
                         ItemName = r.Attributes.Keys.Contains("new_itemname") ? r["new_itemname"].ToString() : "",
                         RequestTitle = r.Attributes.Keys.Contains("new_name") ? r["new_name"].ToString() : "",
@@ -39,8 +39,7 @@ namespace CRMPortal.SharedServices.Models
                         NumberOfitems = r.Attributes.Keys.Contains("new_numberofitems") ? r["new_numberofitems"].ToString() : "",
                         Purpose = r.Attributes.Keys.Contains("new_purpose") ? r["new_purpose"].ToString() : "",
                         StatusReason = r.Attributes.Keys.Contains("statuscode") ? r.FormattedValues["statuscode"].ToString() : "",
-                        RequestType = "Purchase Order", 
-                        
+                        RequestOwner = r.FormattedValues["ownerid"],
 
                     });
                 }
@@ -54,7 +53,7 @@ namespace CRMPortal.SharedServices.Models
         }
         internal PurchaseOrderRequest GetPurchaseRequestById(Guid user_id,Guid requestId)
         {
-            return GetAllAsPurchaseOrderRequest(user_id).FirstOrDefault(r => r.PK == requestId);
+            return GetAllAsPurchaseOrderRequest(user_id).FirstOrDefault(r => r.Id == requestId);
         }
 
         internal void SubmitRequest(Entity req)
