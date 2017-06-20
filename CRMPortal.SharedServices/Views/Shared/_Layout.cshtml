@@ -1,4 +1,4 @@
-﻿@*<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -41,10 +41,10 @@
                     <li>@Html.ActionLink("Transportaion Request", "Index", "Transportation")</li>
                     <li>@Html.ActionLink("Vacation Request", "Index", "Vacation")</li>
                     <li>@Html.ActionLink("lOg Out", "LogOut", "Account")</li>
-                       
-                    @*<li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
-                @*</ul>
+
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
             </div>
         </div>
     </div>
@@ -84,52 +84,4 @@
         });
     </script>
 </body>
-</html>*@
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <title>@ViewBag.Title - My ASP.NET MVC Application</title>
-    <link href="~/Images/dotnetsaifavicon.ico" rel="shortcut icon" type="image/x-icon" />
-    <meta name="viewport" content="width=device-width" />
-
-
-    @Scripts.Render("~/bundles/modernizr")
-    @Styles.Render("~/Content/css")
-</head>
-<body>
-    <header>
-
-        <div class="col-md-12 col-sm-12">
-            <section id="login">
-                @Html.Partial("_LoginPartial")
-            </section>
-        </div>
-
-    </header>
-    <div id="body">
-        @RenderSection("featured", required: false)
-        <section class="">
-            @RenderBody()
-        </section>
-    </div>
-    <footer>
-        <div class="container">
-            <div class="text-center footer">
-                Developed By <a href="mailto:minadawoudshahhat@gmail.com">Mina Dawoud</a>
-                Designed By <a href="mailto:minadawoudshahhat@gmail.com">Our GP Team</a>
-            </div>
-        </div>
-    </footer>
-
-
-    @Scripts.Render("~/bundles/jquery")
-    @Styles.Render("~/Content/themes/base/css")
-    @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/jqueryui")
-    @RenderSection("scripts", required: false)
-</body>
 </html>
-
