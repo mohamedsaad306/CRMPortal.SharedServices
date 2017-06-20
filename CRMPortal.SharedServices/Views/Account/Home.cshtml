@@ -3,7 +3,6 @@
 @{
     ViewBag.Title = "Home";
 }
-
 <h3>
     @*<label class="">Welcome </label>*@
     @*@Html.DisplayFor(e => e.Acc.UserLastName, new { @class = "lable label-info" })*@
@@ -11,7 +10,6 @@
 @*<br />*@
 @*<h3>*@
 @*@Html.ActionLink("Display Contacts", "GetContacts", "Account", new { }, new { @class = "btn btn-primary" })*@
-
 @*@Html.ActionLink("Help Desk Request", "Index", "HelpDesk", new { }, new { @class = "btn btn-primary" })
 
     @Html.ActionLink("Purchase Order", "Index", "PurchaseOrder", new { }, new { @class = "btn btn-primary" })
@@ -21,18 +19,16 @@
     @Html.ActionLink("Transportaion Request", "Index", "Transportation", new { }, new { @class = "btn btn-primary" })
     </h3>*@
 
-
 <div class="container">
 
     <div class="clearfix"></div>
 
     <fieldset>
-        <legend class="legend">Welcome</legend>
+        @*<legend class="legend">Welcome</legend>*@
 
         <div class="panel">
 
             <div class="panel-body">
-
                 <div>
                     @*  I have an objection here !!! *@
                     @*@Html.ActionLink("New Reqest", "Edit", "Transportation", null, new { @class = "new" })*@
@@ -42,7 +38,7 @@
                 <table data-toggle="table"
                        data-pagination="true"
                        data-search="true"
-                       data-show-refresh="true"
+                       data-show-refresh="false"
                        data-show-toggle="true"
                        data-show-columns="true"
                        data-toolbar="#toolbar"
@@ -52,8 +48,9 @@
                             <th>Title</th>
                             <th>Request Number</th>
                             <th>Date</th>
-                            <th>Dtatus</th>
-                            <th>Action</th>
+                            <th>Status</th>
+                            <th>Request Type </th>
+                            <th>Responsable</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -61,12 +58,31 @@
                             foreach (var r in Model.Requests)
                             {
                                 <tr>
-                                    <td>@r.RequestTitle</td>
+                                    @{
+                                var controller = "";
+                                switch (r.RequestType.ToLower())
+                                {
+                                    case "help desk":
+                                        controller = "HelpDesk";
+                                        break;
+                                    case "purchase order":
+                                        controller = "PurchaseOrder";
+                                        break;
+                                    case "transportation":
+                                        controller = "Transportation";
+                                        break;
+                                        
+                                    default:
+                                        break;
+                                }
+                                    }
+                                   <td><a href="/@controller/Edit/@r.Id">@r.RequestTitle</a></td>       
                                     <td>@r.RequestNumber</td>
                                     <td>@r.CreatedAt</td>
                                     <td>@r.StatusReason</td>
                                     @*<td><label class="btn btn-primary" >Action</label></td>*@
                                     <td>@r.RequestType</td>
+                                    <td>@r.RequestOwner</td>
                                 </tr>
                             }
                         }

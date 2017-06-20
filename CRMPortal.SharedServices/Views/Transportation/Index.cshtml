@@ -41,7 +41,8 @@
                             foreach (var r in Model.requests)
                             {
                                 <tr>
-                                    <td>@r.RequestTitle</td>
+                                    <td><a href="Edit/@r.Id">@r.RequestTitle</a></td>
+                                    @*<td>@r.RequestTitle</td>*@
                                     <td>@r.RequestNumber</td>
                                     <td>@r.TransportationDate</td>
                                     <td>@r.RelatedClient </td>

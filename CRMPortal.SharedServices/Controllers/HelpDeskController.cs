@@ -49,6 +49,7 @@ namespace CRMPortal.SharedServices.Controllers
             uof = Auth.GetContext(Session["LoggedInUser"].ToString(), Session["LoggedInPassword"].ToString());
 
             HelpDeskFormViewModel vm = new HelpDeskFormViewModel();
+
             HelpDeskRequest tr = new HelpDeskRequest() { StatusReason="New"};
             if (id != null)
             {
@@ -88,7 +89,7 @@ namespace CRMPortal.SharedServices.Controllers
 
             }
 
-            switch (_r.Action)
+            switch (_r.Action.ToLower())
             {
                 case "submit":
                     if (_r.HelpDeskRequest.Id == Guid.Empty)
@@ -126,7 +127,7 @@ namespace CRMPortal.SharedServices.Controllers
                     uof.HelpDeskModel.UpdateRequest(_r.HelpDeskRequest, _r.Action, UpdateAction);
                     break;
                 case "confirm":
-                    OptionSetValue ConfirmAction = new OptionSetValue();
+                    OptionSetValue ConfirmAction = new OptionSetValue(100000008); // Confirm
                     uof.HelpDeskModel.UpdateRequest(_r.HelpDeskRequest, _r.Action, ConfirmAction);
                     break;
                 default:

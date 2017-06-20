@@ -12,6 +12,7 @@ namespace CRMPortal.SharedServices.Models.DomainModels
             AvailableActions = new List<string>();
             AvailableActions.Add("save");
             AvailableActions.Add("submit");
+            RequestType = "Help Desk";
         }
         //public string RequestTitle { get; set; }
         //public string RequestDetails { get; set; }
@@ -22,5 +23,7 @@ namespace CRMPortal.SharedServices.Models.DomainModels
 
         public Guid Category { get; set; }
         public Guid SubCategory { get; set; }
+
+        
     }
 }
