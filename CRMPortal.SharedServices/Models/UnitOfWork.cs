@@ -12,15 +12,15 @@ namespace CRMPortal.SharedServices.Models
     {
 
         private readonly OrganizationServiceContext _context;
-        public  IOrganizationService OrganizaionService { get; set; }
+        public IOrganizationService OrganizaionService { get; set; }
 
 
         public UnitOfWork(OrganizationServiceContext ctx, IOrganizationService orgService)
         {
             _context = ctx;
             OrganizaionService = orgService;
-           
-            AccModel = new AccountModel(_context,OrganizaionService);
+
+            AccModel = new AccountModel(_context, OrganizaionService);
 
         }
         public void Dispose()
@@ -29,7 +29,7 @@ namespace CRMPortal.SharedServices.Models
         }
 
         public AccountModel AccModel { get; set; }
-        public HelpDeskModel HelpDeskModel { get { return new HelpDeskModel(_context,OrganizaionService); } }
+        public HelpDeskModel HelpDeskModel { get { return new HelpDeskModel(_context, OrganizaionService); } }
         public ContactModel ContactModel { get { return new ContactModel(_context, OrganizaionService); } }
         public PurchaseOrderModel PurchaseOrderModel { get { return new PurchaseOrderModel(_context, OrganizaionService); } }
         public RoomReservationModel RoomReservationModel { get { return new RoomReservationModel(_context, OrganizaionService); } }
@@ -39,6 +39,6 @@ namespace CRMPortal.SharedServices.Models
         public CustomerModel Customers { get { return new CustomerModel(_context, OrganizaionService); } }
         public HelpDeskCategoryModel HelpDeskRequestCategories { get { return new HelpDeskCategoryModel(_context, OrganizaionService); } }
         public HelpDeskSubCategoryModel HelpDeskRequestSubCategories { get { return new HelpDeskSubCategoryModel(_context, OrganizaionService); } }
-        
+        public VacationModel VacationRequests { get { return new VacationModel(_context, OrganizaionService); } }
     }
 }

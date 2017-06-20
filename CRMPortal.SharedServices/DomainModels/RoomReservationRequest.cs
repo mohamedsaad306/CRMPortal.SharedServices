@@ -8,6 +8,11 @@ namespace CRMPortal.SharedServices.DomainModels
 {
     public class RoomReservationRequest:Request
     {
+        public RoomReservationRequest()
+        {
+
+            RequestType = "Room Reservation";
+        }
         public DateTime Day { get; set; }
         public DateTime DateFrom { get; set; }
         public DateTime DateTo { get; set; }
