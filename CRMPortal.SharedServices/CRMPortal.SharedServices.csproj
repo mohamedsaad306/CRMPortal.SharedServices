@@ -376,12 +376,9 @@
     <Content Include="Scripts\jquery-3.1.1.min.map" />
     <Content Include="Views\Transportation\Index.cshtml" />
     <Content Include="Views\Transportation\Edit.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-=======
     <Content Include="Views\Vacation\Index.cshtml" />
->>>>>>> 2dd4741d9d2181f37cc673bf35d15da98694a9d4
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
