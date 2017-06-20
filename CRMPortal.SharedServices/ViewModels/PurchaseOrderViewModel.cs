@@ -16,15 +16,18 @@ namespace CRMPortal.SharedServices.ViewModels
     public class PurchaseOrderFormViewModel
     {
         [Display(Name = "Title")]
+        [Required(ErrorMessage = "Enter Request Title")]
         public string RequestTitle { get; set; }
 
         [Display(Name = "SaveOrDraft")]
         public string SaveOrDraft { get; set; }
         [Display(Name = "# Items")]
+        [ValidateScheme_NumberOfItems(ErrorMessage = "Enter Number Between 1 and 50")]
         public string NumberOfitems { get; set; }
         [Display(Name = "Status")]
         public string Status { get; set; }
         [Display(Name = "Item Name")]
+        [Required(ErrorMessage = "Enter Item Name")]
         public string ItemName { get; set; }
         [Display(Name = "Status")]
         public string StatusReason { get; set; }
@@ -33,6 +36,14 @@ namespace CRMPortal.SharedServices.ViewModels
         [Display(Name = "PK")]
         public Guid PK { get; set; }
 
+    }
+
+    public class ValidateScheme_NumberOfItems : ValidationAttribute
+    {
+        public override bool IsValid(object value)
+        {
+            return (Convert.ToInt32(value) > 0 && Convert.ToInt32(value) < 50);
+        }
     }
 
 }

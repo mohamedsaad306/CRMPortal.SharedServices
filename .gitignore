@@ -165,3 +165,4 @@ CRMPortal.SharedServices/CRMPortal.SharedServices.csproj
 CRMPortal.SharedServices/CRMPortal.SharedServices.csproj
 >>>>>>> 39f829b21ea98ec082714e03c836abd606a6c8de
 CRMPortal.SharedServices/Controllers/PurchaseOrderController.cs
+*.js
