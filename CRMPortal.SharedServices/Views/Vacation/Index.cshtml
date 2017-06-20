@@ -1,0 +1,59 @@
+﻿@model CRMPortal.SharedServices.ViewModels.VacationRequestIndexViewModel
+@{
+    ViewBag.Title = "Index";
+}
+ 
+<div class="container">
+
+    <div class="clearfix"></div>
+
+    <fieldset>
+        <legend class="legend">Vacation Requests</legend>
+
+        <div class="panel">
+
+            <div class="panel-body">
+
+                <div>
+                    @Html.ActionLink("Create Vacation Request", "Edit", "Vacation", null, new { @class = "new" })
+                </div>
+                <div style="margin-top: 10px"></div>
+
+                <table data-toggle="table"
+                       data-pagination="true"
+                       data-search="true"
+                       data-show-refresh="false"
+                       data-show-toggle="true"
+                       data-show-columns="true"
+                       data-toolbar="#toolbar"
+                       class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Request Number</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Owner </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (var r in Model.Requests)
+                            {
+                                <tr>
+                                    <td><a href="Edit/@r.Id">@r.RequestTitle</a></td>
+                                    @*<td>@r.RequestTitle</td>*@
+                                    <td>@r.RequestNumber</td>
+                                    <td>@r.CreatedAt</td>
+                                    <td>@r.StatusReason</td>
+                                    <td>@r.RequestOwner</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </fieldset>
+</div>
