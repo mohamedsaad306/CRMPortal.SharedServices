@@ -79,11 +79,11 @@ namespace CRMPortal.SharedServices.Controllers
            
             if (_r.HelpDeskRequest.Id == Guid.Empty)
             {
-                req["new_name"] = _r.RequestTitle;
-                req["new_requestdetails"] = _r.RequestDetails;
+                req["new_name"] = _r.HelpDeskRequest.RequestTitle;
+                req["new_requestdetails"] = _r.HelpDeskRequest.RequestDetails;
 
-                req["new_helpdeskcategoryid"] = new EntityReference(new_helpdeskcategory.EntityLogicalName, _r.Category);
-                req["new_subcategory"] = new EntityReference(new_helpdeskrequestsubcategory.EntityLogicalName, _r.SubCategory);
+                req["new_helpdeskcategoryid"] = new EntityReference(new_helpdeskcategory.EntityLogicalName, _r.HelpDeskRequest.Category);
+                req["new_subcategory"] = new EntityReference(new_helpdeskrequestsubcategory.EntityLogicalName, _r.HelpDeskRequest.SubCategory);
                 Guid uid = new Guid(Session["LoggedInUserId"].ToString());
                 req["new_relatedemployeeid"] = new EntityReference("systemuser", uid);
 

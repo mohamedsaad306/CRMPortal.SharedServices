@@ -34,7 +34,7 @@ namespace CRMPortal.SharedServices.Models
             //}
         }
 
-        internal List<SharedServices.DomainModels.Transportation> GetAllAsTransportaion(Guid User_id)
+        internal List<Transportation> GetAllAsTransportaion(Guid User_id)
         {
             List<Entity> requests = (List<Entity>)GetRequests(User_id);
             List<Transportation> viewRequests = new List<Transportation>();
