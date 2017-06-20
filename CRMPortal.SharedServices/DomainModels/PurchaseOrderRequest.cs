@@ -7,6 +7,11 @@ namespace CRMPortal.SharedServices.Models.DomainModels
 {
     public class PurchaseOrderRequest:Request
     {
+        public PurchaseOrderRequest()
+        {
+            RequestType = "Purchase Order";
+        }
+
         public string ItemName { get; set; }
         public string NumberOfitems { get; set; }
         public string Purpose { get; set; }

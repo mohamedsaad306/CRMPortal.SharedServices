@@ -17,7 +17,7 @@ namespace CRMPortal.SharedServices.Models
         public List<Entity> GetAllRequests(Guid usr_id)
         {
 
-
+ 
             return Context.CreateQuery("new_helpdeskrequest").Where(r => r["new_relatedemployeeid"] == new EntityReference("systemuser", usr_id)).ToList();
 
         }
@@ -49,9 +49,9 @@ namespace CRMPortal.SharedServices.Models
                         RequestNumber = r.Attributes.Keys.Contains("new_requestnumber") ? r["new_requestnumber"].ToString() : "",
                         RequestDetails = r.Attributes.Keys.Contains("new_requestdetails") ? r["new_requestdetails"].ToString() : "",
                         StatusReason = r.FormattedValues["statuscode"].ToString(),
-                        RequestType = "Help Desk",
                         Category = r.Attributes.Keys.Contains("new_helpdeskcategoryid") ? ((EntityReference)r["new_helpdeskcategoryid"]).Id : Guid.Empty,
-                        SubCategory = r.Attributes.Keys.Contains("new_subcategory") ? ((EntityReference)r["new_subcategory"]).Id : Guid.Empty
+                        SubCategory = r.Attributes.Keys.Contains("new_subcategory") ? ((EntityReference)r["new_subcategory"]).Id : Guid.Empty,
+                        RequestOwner = r.FormattedValues["ownerid"]
 
                     };
 

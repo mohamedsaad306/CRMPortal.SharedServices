@@ -20,6 +20,10 @@ namespace CRMPortal.SharedServices.Controllers
 
         //
         // GET: /AccountModel/
+        public ActionResult Index()
+        {
+            return View("Login");
+        }
         public ActionResult Login()
         {
             return View();

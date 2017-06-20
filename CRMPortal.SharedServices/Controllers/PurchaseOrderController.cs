@@ -57,7 +57,7 @@ namespace CRMPortal.SharedServices.Controllers
                     {
                         ItemName = po.ItemName,
                         NumberOfitems = po.NumberOfitems,
-                        PK = po.PK,
+                        PK = po.Id,
                         Purpose = po.Purpose,
                         RequestTitle = po.RequestTitle,
                         Status = po.Status,
