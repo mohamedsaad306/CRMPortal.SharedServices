@@ -25,16 +25,28 @@
     <div class="form-group">
 
         @Html.LabelFor(r => r.HelpDeskRequest.Category)
-        @Html.DropDownListFor(r => r.HelpDeskRequest.Category, new SelectList(Model.Categories, "Id", "new_name"), "Select Category ", new { @class = "form-control", id = "selected-room" })
+        @Html.DropDownListFor(r => r.HelpDeskRequest.Category, new SelectList(Model.Categories, "Id", "new_name"), "Select Category ", new { @class = "form-control", id = "selected-category" })
     </div>
 
     <div class="form-group">
         @Html.LabelFor(r => r.HelpDeskRequest.SubCategory)
-        @Html.DropDownListFor(r => r.HelpDeskRequest.SubCategory, new SelectList(Model.SubCategories, "Id", "new_name"), "Select Subcategory  ", new { @class = "form-control", id = "selected-room" })
+        @Html.DropDownListFor(r => r.HelpDeskRequest.SubCategory, new SelectList(Model.SubCategories, "Id", "new_name"), "Select Subcategory  ", new { @class = "form-control", id = "selected-subCategory" })
+        @{if (Model.HelpDeskRequest.isReadOnly)
+          {
+              Html.HiddenFor(r => r.HelpDeskRequest.Category);
+              Html.HiddenFor(r => r.HelpDeskRequest.SubCategory);
+          }}    
+        @Html.HiddenFor(r => r.HelpDeskRequest.Category)
+        @Html.HiddenFor(r => r.HelpDeskRequest.SubCategory)
     </div>
 
+    @Html.HiddenFor(r => r.HelpDeskRequest.Id);
     <div class="form-group">
-        <input type="submit" name="name" value="Submit Request" class="btn btn-primary" />
+        @foreach (var action in Model.HelpDeskRequest.AvailableActions)
+        {
+            <input type="submit" name="Action" value="@action" class="btn btn-primary" />
+
+        }
     </div>
 
 }
@@ -42,13 +54,17 @@
 <script type="text/javascript">
 
     var k = @Html.Raw(Model.HelpDeskRequest.isReadOnly.ToString().ToLower());
-    //var k = true;
     if (k) {
         console.log($('#request-form :input'));
         $("#request-form :input ").prop("readonly", true);
-        $("#request-form :option").prop("readonly", true);
-        $("#request-form :select").attr("disabled", true);
-        $("#request-form   [type=submit]").prop("disabled", true);
+
+        $("#selected-category").prop("disabled", true);
+        $("#selected-subCategory").prop("disabled", true);
+        
+        //$("#request-form :option").prop("readonly", true);
+        //$("#request-form :select").attr("disabled", true);
+
+        //$("#request-form   [type=submit]").prop("disabled", true);
 
         //$('#request-form').find("input").addClass("disabled");
 

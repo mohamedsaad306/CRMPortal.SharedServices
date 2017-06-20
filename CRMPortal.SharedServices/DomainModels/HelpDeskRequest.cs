@@ -7,6 +7,12 @@ namespace CRMPortal.SharedServices.Models.DomainModels
 {
     public class HelpDeskRequest :Request
     {
+        public HelpDeskRequest()
+        {
+            AvailableActions = new List<string>();
+            AvailableActions.Add("save");
+            AvailableActions.Add("submit");
+        }
         //public string RequestTitle { get; set; }
         //public string RequestDetails { get; set; }
         //public string Status { get; set; }

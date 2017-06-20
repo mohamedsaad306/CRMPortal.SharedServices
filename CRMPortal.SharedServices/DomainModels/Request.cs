@@ -16,6 +16,7 @@ namespace CRMPortal.SharedServices.Models.DomainModels
         public DateTime CreatedAt { get; set; }
         public String RequestType { get; set; }
         public bool isReadOnly { get; set; }
+        public List<string> AvailableActions { get; set; }
 
     }
 }

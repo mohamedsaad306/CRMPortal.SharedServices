@@ -5,27 +5,6 @@
  
 @Html.ActionLink("New Reqest", "Edit", "HelpDesk", null, new { @class = "label label-success" }) 
 <br />
-<table class="table table-hover table-striped">
-    <tr>
-        <th>Title</th>
-        <th>Request Number </th>
-        <th>Details</th>
-        <th>Status</th>
-    </tr>
-    @{
-        foreach (var r in Model.Requests)
-        {
-           <tr>
-               <td><a href="/HelpDesk/Edit/@r.Id">@r.RequestTitle</a></td>
-               <td>@r.RequestNumber</td>
-               <td>@r.RequestDetails</td>
-               <td>@r.StatusReason</td>
-           </tr>
-        }
-    }
-</table>
- 
-
 <div class="container">
 
     <div class="clearfix"></div>
@@ -63,7 +42,7 @@
                             foreach (var r in Model.Requests)
                             {
                                 <tr>
-                                    <td>@r.RequestTitle</td>
+                                    <td><a href="/HelpDesk/Edit/@r.Id">@r.RequestTitle</a></td>
                                     <td>@r.RequestNumber</td>
                                     <td>@r.RequestDetails</td>
                                     <td>@r.StatusReason</td>
@@ -77,3 +56,24 @@
         </div>
     </fieldset>
 </div>
+
+
+@*<table class="table table-hover table-striped">
+        <tr>
+            <th>Title</th>
+            <th>Request Number </th>
+            <th>Details</th>
+            <th>Status</th>
+        </tr>
+        @{
+            foreach (var r in Model.Requests)
+            {
+               <tr>
+                   <td><a href="/HelpDesk/Edit/@r.Id">@r.RequestTitle</a></td>
+                   <td>@r.RequestNumber</td>
+                   <td>@r.RequestDetails</td>
+                   <td>@r.StatusReason</td>
+               </tr>
+            }
+        }
+    </table>*@

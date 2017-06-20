@@ -28,6 +28,8 @@ namespace CRMPortal.SharedServices.ViewModels
         public Guid SubCategory { get; set; }
 
         public HelpDeskRequest HelpDeskRequest { get; set; }
+        public string Action { get; set; }
+
     }
 
 

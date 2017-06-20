@@ -19,7 +19,7 @@ namespace CRMPortal.SharedServices.Controllers
 
         //
         // GET: /HelpDesk/
-      
+
         public ActionResult Index()
         {
             if (Session["LoggedInUserId"] == null)
@@ -36,7 +36,7 @@ namespace CRMPortal.SharedServices.Controllers
             HelpDeskIndexViewModel vm = new HelpDeskIndexViewModel() { Requests = viewRequests };
             uof.Dispose();
             return View(vm);
-        }  
+        }
 
 
         public ActionResult Edit(Guid? id)
@@ -47,15 +47,15 @@ namespace CRMPortal.SharedServices.Controllers
                 return RedirectToAction("Login", "Account");
             }
             uof = Auth.GetContext(Session["LoggedInUser"].ToString(), Session["LoggedInPassword"].ToString());
-            
-            HelpDeskFormViewModel vm = new HelpDeskFormViewModel ();
-            HelpDeskRequest tr = null;
-            if (id!=null)
+
+            HelpDeskFormViewModel vm = new HelpDeskFormViewModel();
+            HelpDeskRequest tr = new HelpDeskRequest() { StatusReason="New"};
+            if (id != null)
             {
                 //Guid usrId= new Guid(Session[""])
                 tr = uof.HelpDeskModel.GetById(new Guid(Session["LoggedInUserId"].ToString()), id);
             }
-            
+
             vm.Categories = uof.HelpDeskRequestCategories.GetAllCategories();
             vm.SubCategories = uof.HelpDeskRequestSubCategories.GetAllSubCategories();
             vm.HelpDeskRequest = tr;
@@ -72,21 +72,67 @@ namespace CRMPortal.SharedServices.Controllers
                 return RedirectToAction("Login", "Account");
             }
             uof = Auth.GetContext(Session["LoggedInUser"].ToString(), Session["LoggedInPassword"].ToString());
-            
-            new_helpdeskrequest r = new new_helpdeskrequest();
-           
+
+            //new_helpdeskrequest r = new new_helpdeskrequest();
             Entity req = new Entity("new_helpdeskrequest");
-            req["new_name"] = _r.RequestTitle;
-            req["new_requestdetails"] = _r.RequestDetails;
-            req["new_action"] = new OptionSetValue(100000000);
+           
+            if (_r.HelpDeskRequest.Id == Guid.Empty)
+            {
+                req["new_name"] = _r.RequestTitle;
+                req["new_requestdetails"] = _r.RequestDetails;
 
-            req["new_helpdeskcategoryid"] = new EntityReference(new_helpdeskcategory.EntityLogicalName,_r.Category);
-            req["new_subcategory"] = new EntityReference(new_helpdeskrequestsubcategory.EntityLogicalName,_r.SubCategory);
+                req["new_helpdeskcategoryid"] = new EntityReference(new_helpdeskcategory.EntityLogicalName, _r.Category);
+                req["new_subcategory"] = new EntityReference(new_helpdeskrequestsubcategory.EntityLogicalName, _r.SubCategory);
+                Guid uid = new Guid(Session["LoggedInUserId"].ToString());
+                req["new_relatedemployeeid"] = new EntityReference("systemuser", uid);
 
-            Guid uid = new Guid(Session["LoggedInUserId"].ToString());
-            req["new_relatedemployeeid"] = new EntityReference("systemuser", uid);
+            }
 
-          uof.HelpDeskModel.SubmitRequest(req);
+            switch (_r.Action)
+            {
+                case "submit":
+                    if (_r.HelpDeskRequest.Id == Guid.Empty)
+                    {
+                        req["new_action"] = new OptionSetValue(100000000); //submit value 
+                        uof.HelpDeskModel.SubmitRequest(req);
+                    }
+                    else
+                    {
+                        OptionSetValue submit = new OptionSetValue(100000000); //Save value 
+                        uof.HelpDeskModel.UpdateRequest(_r.HelpDeskRequest, "submit", submit);
+                    }
+                    break;
+
+                case "save":
+                    if (_r.HelpDeskRequest.Id == Guid.Empty)
+                    {
+                        req["new_action"] = new OptionSetValue(100000001); //save value 
+                        uof.HelpDeskModel.SubmitRequest(req);
+                    }
+                    else
+                    {
+                        OptionSetValue saveAction = new OptionSetValue(100000001); //Save value 
+                        uof.HelpDeskModel.UpdateRequest(_r.HelpDeskRequest, "save", saveAction);
+                    }
+                    break;
+
+                case "cancel":
+                    OptionSetValue CancelAction = new OptionSetValue(100000009); //cancel value 
+                    uof.HelpDeskModel.UpdateRequest(_r.HelpDeskRequest, _r.Action, CancelAction);
+                    break;
+
+                case "update":
+                    OptionSetValue UpdateAction = new OptionSetValue(100000010); //Resubmit value 
+                    uof.HelpDeskModel.UpdateRequest(_r.HelpDeskRequest, _r.Action, UpdateAction);
+                    break;
+                case "confirm":
+                    OptionSetValue ConfirmAction = new OptionSetValue();
+                    uof.HelpDeskModel.UpdateRequest(_r.HelpDeskRequest, _r.Action, ConfirmAction);
+                    break;
+                default:
+                    break;
+            }
+
             return RedirectToAction("index");
         }
     }
