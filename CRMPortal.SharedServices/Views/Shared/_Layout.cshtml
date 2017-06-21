@@ -81,7 +81,31 @@
             $(".new").addClass("btn btn-info btn-pressure");
             $(".new").addClass("btn-info");
             $(".new").addClass("btn-pressure");
+
+
+            $(".validate").click(function (e) {
+                e.preventDefault();
+                var _this = $(this);
+                var _form = _this.closest("form");
+
+                var validator = $("form").validate(); // obtain validator
+                var anyError = false;
+                _form.find("input").each(function () {
+                    if (!validator.element(this)) { // validate every input element inside this step
+                        anyError = true;
+                    }
+                });
+
+                if (anyError)
+                    return false; // exit if any error found
+
+                $.post(_form.attr("action"), _form.serialize(), function (data) {
+                    //check the result and do whatever you want
+                })
+            })
+
         });
     </script>
+
 </body>
 </html>

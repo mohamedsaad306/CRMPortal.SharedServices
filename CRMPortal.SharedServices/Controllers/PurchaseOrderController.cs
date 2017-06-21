@@ -65,16 +65,16 @@ namespace CRMPortal.SharedServices.Controllers
                     };
                     TempData["PK"] = id;
                     TempData["Flag"] = true;
+                    if (po.RequestNumber != "")
+                    {
+                        ViewBag.IsReadOnly = "readonly";
+                    }
                 }
                 else
                 {
                     r = null;
                 }
 
-                if (po.RequestNumber != "")
-                {
-                    ViewBag.IsReadOnly = "readonly";
-                }
                 return View(r);
             }
             else

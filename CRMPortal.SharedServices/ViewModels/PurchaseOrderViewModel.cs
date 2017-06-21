@@ -34,6 +34,7 @@ namespace CRMPortal.SharedServices.ViewModels
         [Display(Name = "Purpose")]
         public string Purpose { get; set; }
         [Display(Name = "PK")]
+        [Key]
         public Guid PK { get; set; }
 
     }
